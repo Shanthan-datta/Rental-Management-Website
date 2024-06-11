@@ -2,7 +2,7 @@ import { facebook, instagram, shieldTick, support, truckFast, twitter } from "..
 import { bigShoe1, bigShoe2, bigShoe3, customer1, customer2, thumbnailShoe1, thumbnailShoe2, thumbnailShoe3, appartment1, appartment2, appartment3, appartment4 } from "../assets/images";
 
 export const navLinks = [
-    { href: "#home", label: "Home" },
+    { href: "/", label: "Home" },
     { href: "#about-us", label: "About Us" },
     { href: "Ticket", label: "Report an Issue" },
     { href: "#contact-us", label: "Contact Us" },
@@ -147,8 +147,8 @@ export const footerLinks = [
 ];
 
 export const socialMedia = [
-    { src: facebook, alt: "facebook logo" },
-    { src: twitter, alt: "twitter logo" },
+    { src: facebook, alt: "facebook logo", link: "https://www.instagram.com/3way_assist?igsh=MXhsbTIwcDFuN2lpNA==" },
+    { src: twitter, alt: "twitter logo",link:"" },
     { src: instagram, alt: "instagram logo",
         link:"https://www.instagram.com/3way_assist?igsh=MWg2bGFoNTdsZ2ZqMQ==" },
 ];
