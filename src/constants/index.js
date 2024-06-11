@@ -53,18 +53,8 @@ export const products = [
         price: "Rent-₹30000",
     },
     {
-        imgURL: appartment1,
-        name: "Marina skies",
-        price: "Rent-₹30000",
-    },
-    {
-        imgURL: appartment1,
-        name: "Marina skies",
-        price: "Rent-₹30000",
-    },
-    {
-        imgURL: appartment1,
-        name: "Marina skies",
+        imgURL: appartment5,
+        name: "Ghataprabha",
         price: "Rent-₹30000",
     },
     
