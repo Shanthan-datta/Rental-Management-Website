@@ -1,12 +1,14 @@
-import Buttons from "../components/Buttons"
+
 import { useState } from "react"
 import { arrowRight } from "../assets/icons"
 import {shoes, statistics } from "../constants"
 import {bigShoe1} from "../assets/images"
 import ShoeCard from "../components/ShoeCard"
+import { useHref } from "react-router-dom"
 
 const Hero = () => {
   const [bigShoeImg, setbigShoeImg] = useState(bigShoe1)
+  
   return (
     <section 
       id="home"
@@ -31,8 +33,20 @@ const Hero = () => {
         text-lg leading-8 mt-6 mb-14 sm:max-w-sm
         ">Live comfortably with our included maintenance and resident assistance programs
         </p>
-        <Buttons label="Explore"
-        iconURL={arrowRight}/>
+        <a href="#products"><button className="flex justify-center
+    items-center gap-2 px-7 py-4 font-montserrat
+    text-lg leading-none bg-purple-800 rounded-full text-white
+    border-black shadow-md hover:shadow-lg  hover:bg-purple-600 ">
+       Explore
+         
+       <img
+         src={arrowRight}
+         alt="arrow right icon"
+         className="ml-2 rounded-full
+         w-5 h-5"
+       
+       />
+    </button></a>
         <p className="mt-10 p-4 text-lg font-montserrat text-black">
     We are managing
 </p>
