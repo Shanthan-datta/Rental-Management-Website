@@ -7,6 +7,7 @@ export const navLinks = [
     { href: "Ticket", label: "Report an Issue" },
     { href: "#contact-us", label: "Contact Us" },
     { href: "Login", label: "Login" },
+    { href: "signUp", label: "Signup"}
 ];
 
 export const shoes = [

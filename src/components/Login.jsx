@@ -1,8 +1,13 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 
-
-function Login() {
+function Login  () {
+  const nagivate = useNavigate()
+  const goToSignUP = () => {
+    nagivate('/signUp')
+}
+  
   return (
     
     
@@ -22,7 +27,7 @@ function Login() {
             <button className='w-full py-3 mt-8 bg-purple-900 hover:bg-purple-600 relative text-white rounded-md'>Sign In</button>
             <p className='flex items-center mt-2'><input className='mr-2' type="checkbox"  />Remember Me</p>
             <p className='text-center mt-8'>Not a member? 
-              <button className='w-20 h-8 mx-2 bg-purple-900 hover:bg-purple-600 relative text-white rounded-md '>Sign up</button> 
+              <button className='w-20 h-8 mx-2 bg-purple-900 hover:bg-purple-600 relative text-white rounded-md ' onClick={()=> goToSignUP()}>Sign up</button> 
               now
               </p>
         </form>
