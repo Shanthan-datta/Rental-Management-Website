@@ -20,7 +20,7 @@ const PopularProducts = () => {
 
         </div>
         <div className="flex mt-16 w-120 flex-row  flex-shrink-0 gap-4 py-2 overflow-x-auto 
-        scrollbar scrollbar-thumb-purple
+        scrollbar-webkit scrollbar-thin
           ">
           {products.map((product)=>(
             <PopularProductCard key={product.name}

@@ -53,7 +53,7 @@ export const products = [
         price: "Rent-₹30000",
     },
     {
-        imgURL: appartment5,
+        imgURL: appartment1,
         name: "Ghataprabha",
         price: "Rent-₹30000",
     },

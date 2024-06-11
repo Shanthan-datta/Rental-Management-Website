@@ -40,5 +40,32 @@ export default {
       }
     },
   },
-  plugins: [  ],
+  plugins: [  
+    function({addUtilities}){
+      const newUtilities =  {
+        ".scrollbar-thin" : {
+          scrollbarWidth : "thin",
+          scrollbarColor : "rgb(106, 27, 154) white"
+        },
+        ".scrollbar-webkit" : {
+          "&::-webkit-scrollbar" : {
+            width : "30px",
+            height : "40px"
+          },
+          "&::-webkit-scrollbar-track" : {
+            background : "white"
+          },
+          "&::-webkit-scrollbar-thumb" : {
+            backgroundColor :" rbg(229, 204, 255)",
+            borderRadius : "50px",
+            border : "1px solid white"
+          }
+          
+
+        }
+      }
+        addUtilities(newUtilities,["responsive","hover"])
+    }
+
+  ],
 }
