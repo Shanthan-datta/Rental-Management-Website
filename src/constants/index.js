@@ -52,6 +52,11 @@ export const products = [
         name: "Marina skies",
         price: "Rent-₹30000",
     },
+    {
+        imgURL: appartment5,
+        name: "Ghataprabha",
+        price: "Rent-₹30000",
+    },
 ];
 
 export const services = [
