@@ -44,7 +44,7 @@ export default {
     function({addUtilities}){
       const newUtilities =  {
         ".scrollbar-thin" : {
-          scrollbarWidth : "thin",
+          scrollbarWidth : "large",
           scrollbarColor : "rgb(106, 27, 154) white"
         },
         ".scrollbar-webkit" : {
