@@ -53,8 +53,28 @@ export const products = [
         price: "Rent-₹30000",
     },
     {
-        imgURL: appartment5,
-        name: "Ghataprabha",
+        imgURL: appartment4,
+        name: "Marina skies",
+        price: "Rent-₹30000",
+    },
+    {
+        imgURL: appartment1,
+        name: "ASBL aspire",
+        price: "Rent-₹30000",
+    },
+    {
+        imgURL: appartment2,
+        name: "ASBL LAKE SIDE",
+        price: "Rent-₹35000",
+    },
+    {
+        imgURL: appartment3,
+        name: "RAINBOW VISTAS ROCK GARDEN",
+        price: "Rent-₹40000",
+    },
+    {
+        imgURL: appartment4,
+        name: "Marina skies",
         price: "Rent-₹30000",
     },
 ];
