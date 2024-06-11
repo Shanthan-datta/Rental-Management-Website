@@ -1,5 +1,6 @@
 import { appartment5 } from "../assets/images";
 import Buttons from "../components/Buttons";
+import { arrowRight } from "../assets/icons"
 
 const SuperQuality = () => {
   return (
@@ -22,7 +23,7 @@ const SuperQuality = () => {
         Join us and experience a world where rental management meets superlative quality at every step.
         </p>
         <div className='mt-11'>
-          <Buttons label='View details' />
+          <Buttons label='View details' iconURL={arrowRight} />
         </div>
       </div>
 

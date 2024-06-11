@@ -4,7 +4,6 @@ import { arrowRight } from "../assets/icons"
 import {shoes, statistics } from "../constants"
 import {bigShoe1} from "../assets/images"
 import ShoeCard from "../components/ShoeCard"
-import { useHref } from "react-router-dom"
 
 const Hero = () => {
   const [bigShoeImg, setbigShoeImg] = useState(bigShoe1)
