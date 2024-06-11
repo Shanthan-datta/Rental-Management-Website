@@ -2,7 +2,7 @@ import React from 'react'
 import{ Hero,PopularProducts,SuperQuality,Services,
     CustomerReviews,Footer} from '../sections';
     import Nav from '../components/Nav';
-    //gggggg
+    //gggg
 
 const Home = () => {
   return (

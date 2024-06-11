@@ -44,7 +44,7 @@ export const products = [
     },
     {
         imgURL: appartment3,
-        name: "RAINBOW VISTAS ROCK GARDEN",
+        name: "RAINBOW VISTAS ROCK GARDEN ",
         price: "Rent-₹40000",
     },
     {
@@ -52,6 +52,22 @@ export const products = [
         name: "Marina skies",
         price: "Rent-₹30000",
     },
+    {
+        imgURL: appartment1,
+        name: "Marina skies",
+        price: "Rent-₹30000",
+    },
+    {
+        imgURL: appartment1,
+        name: "Marina skies",
+        price: "Rent-₹30000",
+    },
+    {
+        imgURL: appartment1,
+        name: "Marina skies",
+        price: "Rent-₹30000",
+    },
+    
 ];
 
 export const services = [
