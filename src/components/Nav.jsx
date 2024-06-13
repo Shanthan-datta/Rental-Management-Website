@@ -1,7 +1,11 @@
 import {headerLogo} from '../assets/images';
 import {hamburger} from '../assets/icons';
 import {navLinks} from '../constants';
+import { useState } from 'react';
+import Dropdown from '../sections/dropdown';
+
 const Nav = () => {
+  const [isOpen, setopen] = useState(false)
   return (
     <header className='padding-x py-5 absolute
     z-10 w-full'>
@@ -36,13 +40,17 @@ const Nav = () => {
              
             </ul>
             <div className='hidden max-lg:block'>
-                <img
+                <button onClick={()=>setopen((prev)=>!prev)}>
+                  {!isOpen && <img
                   src={hamburger}
                   alt='Hamburger'
                   width={25}
                   height={25}
                 
-                />
+                />}
+
+                {isOpen && <Dropdown/>}
+                </button>
             </div>
         </nav>
     </header>
