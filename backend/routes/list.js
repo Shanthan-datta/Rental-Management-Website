@@ -2,7 +2,7 @@ const router = require("express").Router()
 const User = require("../models/users")
 const ticketsList = require("../models/ticketslist")
 
-router.post("/addticket", async (req,res)=>{
+router.post("/ticket", async (req,res)=>{
     try {
         const { name,email,contactNo,flatNo, buildingName , street, city , postalCode, issue}=req.body
         const existinguser = await User.findOne({email: req.body.email})
