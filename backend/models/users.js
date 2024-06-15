@@ -23,7 +23,7 @@ const users = new mongoose.Schema({
         required: true,
     },
     
-    list:[{
+    TicketsList:[{
         type: mongoose.Types.ObjectId,
         ref: "ticketsList" ,
     }]

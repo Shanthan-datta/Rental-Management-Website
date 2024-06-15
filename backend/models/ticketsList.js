@@ -37,5 +37,7 @@ const ticketsList = new mongoose.Schema({
         ref: "users" ,
     }],
 
-})
+},
+{timestamps: true}
+)
 module.exports = mongoose.model("ticketsList",ticketsList)
