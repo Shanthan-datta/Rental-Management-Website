@@ -33,5 +33,11 @@ router.delete("/deleteticket/:id", async (req,res)=>{
     }
 })
 
+//gettask
+router.get("/gettickets/:id",async (req,res)=>{
+    const ticketslist = ticketsList.find({users:req.params.id})
+    res.status(200).json({ticketslist})
+})
+
 
 module.exports = router
