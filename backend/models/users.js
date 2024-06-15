@@ -14,7 +14,7 @@ const users = new mongoose.Schema({
         required:true,
     },
     contactNo: {
-        type: Number,
+        type: String,
         unique: true,
         required:true,
     },
