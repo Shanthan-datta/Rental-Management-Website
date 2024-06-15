@@ -6,9 +6,9 @@ const bcrypt = require("bcryptjs")
 //signup
 router.post("/register", async (req,res)=>{
     try {
-        const {firstName, lastName, email,contactNo, password} = req.body;
+        const {firstName, lastName, email,contactNo, password } = req.body;
         const hashpassword = bcrypt.hashSync(password)
-        const user = new User({firstName, lastName, email,contactNo, password: hashpassword})
+        const user = new User({firstName, lastName, email,contactNo, password: hashpassword ,})
         await user.save();
             
             res.status(200).json({zooma: user})
