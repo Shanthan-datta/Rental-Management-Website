@@ -12,7 +12,7 @@ router.post("/register", async (req,res)=>{
         await user.save();
             
             res.status(200).json({zooma: user})
-            console.log('ofiysoifd')
+            
         
     } catch (error) {
         res.status(400).json({message: "user already exists"})
@@ -21,13 +21,24 @@ router.post("/register", async (req,res)=>{
 //signup
 
 //login
-router.post("/register", async (req,res)=>{
+router.post("/Login", async (req,res)=>{
     try {
-        const user = await User.findOne({email: req.body.email})
-        if(!user){
+        var user = await User.findOne({email: req.body.email})
+        const useror = await User.findOne({contactNo: req.body.email})        
+        if(!(user || useror)){
             res.status(400).json({message: "please sign up first"})
         }
-        const checkpassword = bcrypt.compareSync(req.body.password,user.password)
+        if(!user){
+            user= useror
+        }
+        const checkpassword = bcrypt.compareSync(
+            req.body.password,
+            user.password)
+            if(!checkpassword){
+                res.status(400).json({message: "wrong password"})
+            }
+            const {password, ...others} = user._doc
+            res.status(200).json({others})
     } catch (error) {
         res.status(400).json({message: "wrong email or password"})
     }

@@ -1,15 +1,20 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose")
 const ticketsList = new mongoose.Schema({
     name:{
         type: String,
         required: true,
     },
+    email: {
+        type: String,
+        required:true,
+    },
     contactNo: {
-        type: Number,
+        type: String,
         required: true,
     },
+    
     flatNo: {
-        type: Number,
+        type: String,
         required: true,
     },
     buildingName: {
