@@ -13,8 +13,12 @@ app.get("/",(req,res)=>{
     res.send('home')
 })
 
+
 app.use("/api/v1",auth)
 app.use("/api/v", newticketlist)
+app.get("/Ticket",(req,res)=>{
+    
+})
 
 app.listen(1000,()=>{
     console.log("kjsdfhsdh")
