@@ -5,22 +5,22 @@ import React, { useState } from 'react'
 export default function Ticket() {
     const [form, setform] = useState({
         name : '',
-        contactNo: "",
-        flatNo: "",
-        buildingName: "",
-        street: "",
-        city: "",
-        postalCode: "",
-        issue: "",
-
+        contactNo: '',
+        flatNo: '',
+        buildingName: '',
+        street: '',
+        city: '',
+        postalCode: '',
+        issue: ''
         })
         const handleChange = (e) => {
             const { name, value } = e.target;
-            console.log(e.target)
+
             setform({
               ...form,
               [name]: value
             });
+
           };
 
   return (
@@ -31,15 +31,15 @@ export default function Ticket() {
             
             <div className='flex flex-col mb-4'>
                 <label>Name</label>
-                <input className='border relative bg-gray-100 p-2' name="email"  onChange={handleChange} type="text" />
+                <input className='border relative bg-gray-100 p-2' name="name" value={form.name} onChange={handleChange} type="text" />
             </div>
-            {/* <div className='flex flex-col mb-4'>
+            <div className='flex flex-col mb-4'>
                 <label>Contact No.</label>
-                <input className='border relative bg-gray-100 p-2' value={form.contactNo} type="tel" />
+                <input className='border relative bg-gray-100 p-2' name="contactNo" value={form.contactNo}  onChange= {handleChange} type="tel" />
             </div>
             <div className='flex flex-col mb-4'>
                 <label>Flat Number</label>
-                <input className='border relative bg-gray-100 p-2' value={form.flatNo} type="text" />
+                <input className='border relative bg-gray-100 p-2' value={form.flatNo} type="text" required />
             </div>
             <div className='flex flex-col mb-4'>
                 <label>Building Name</label>
@@ -60,7 +60,7 @@ export default function Ticket() {
             <div className='flex flex-col mb-4'>
                 <label>Issue</label>
                 <textarea className='border relative bg-gray-100 p-2' value={form.issue} rows="5"></textarea>
-            </div> */}
+            </div>
             <button className='w-full py-3 mt-8 bg-purple-800 hover:bg-purple-600 relative text-white' >Proceed</button>
             
             
