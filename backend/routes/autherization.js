@@ -20,6 +20,18 @@ router.post("/register", async (req,res)=>{
 })
 //signup
 
+//login
+router.post("/register", async (req,res)=>{
+    try {
+        const user = await User.findOne({email: req.body.email})
+        if(!user){
+            res.status(400).json({message: "please sign up first"})
+        }
+        const checkpassword = bcrypt.compareSync(req.body.password,user.password)
+    } catch (error) {
+        res.status(400).json({message: "wrong email or password"})
+    }
+})
 
 
 
