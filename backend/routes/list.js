@@ -35,8 +35,13 @@ router.delete("/deleteticket/:id", async (req,res)=>{
 
 //gettask
 router.get("/gettickets/:id",async (req,res)=>{
-    const ticketslist = ticketsList.find({users:req.params.id})
-    res.status(200).json({ticketslist})
+    const ticketslist = await ticketsList.find({users:req.params.id}).sort({createdAt : -1})
+    if(ticketslist.length!==0){
+        res.status(200).json({ticketslist})
+    } 
+    else {
+        res.status(200).json({"message": "No ticket has been raised"})
+    }
 })
 
 
