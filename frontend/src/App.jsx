@@ -14,6 +14,7 @@ const App = () => {
     <Route exact path='/Login' element={<Login/>} />
     <Route exact path='/Ticket' element={<Ticket/>}/>
     <Route exact path='/signUp' element={<SignUp/>}/>
+    
 
   </Routes>)}
 export default App;

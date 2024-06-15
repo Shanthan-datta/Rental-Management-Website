@@ -15,6 +15,7 @@ export default class SignUp extends Component {
                 <label>Last Name</label>
                 <input className='border relative bg-gray-100 p-2' type="text" />
             </div>
+        
             <div className='flex flex-col mb-4 rounded-md'>
                 <label>Email</label>
                 <input className='border relative bg-gray-100 p-2' type="email" />
