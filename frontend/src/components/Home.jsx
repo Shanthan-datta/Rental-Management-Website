@@ -12,7 +12,7 @@ const Home = () => {
   wide:padding-r padding-b">
     <Hero />
   </section>
-  <section className="padding">
+  <section  className="padding">
     <PopularProducts/>
   </section>
   <section className="padding">
