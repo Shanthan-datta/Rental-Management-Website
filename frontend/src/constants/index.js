@@ -13,7 +13,8 @@ export const navLinks = [
         isButton: true,
         dropdown: [
             { href: "Login", label: "User Login" },
-            { href: "StaffLoginPage", label: "Staff Login" }
+            { href: "StaffLoginPage", label: "Staff Login" },
+            { href: "AdminLoginPage", label:"Admin Login" }
         ]
     },
     { href: "signUp", label: "Signup", isButton: true }
@@ -24,7 +25,8 @@ export const Login = [
         label: "Login", 
         dropdown: [
             { href: "Login", label:"User Login" },
-            { href: "StaffLoginPage", label:"Staff Login" }
+            { href: "StaffLoginPage", label:"Staff Login" },
+            { href: "AdminLoginPage", label:"Admin Login" }
         ]
     }
 ];
@@ -96,6 +98,25 @@ export const services = [
         subtext: "Our team handles tenant placement with background checks and lease facilitation, ensuring a smooth rental process for owners."
     },
 ];
+export const issues = [
+    {
+      issueName: "Leakage",
+      buildingName: "Building A",
+      description: "Water leakage issue reported in Building A. Urgent attention required.",
+    },
+    {
+      issueName: "Electrical Failure",
+      buildingName: "Building B",
+      description: "Electrical failure reported in Building B. Lights not working in common areas.",
+    },
+    {
+      issueName: "HVAC Maintenance",
+      buildingName: "Building C",
+      description: "HVAC maintenance required in Building C. Temperature control issues observed.",
+    },
+    
+  ];
+  
 
 export const reviews = [
     {

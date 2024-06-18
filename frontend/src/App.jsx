@@ -5,7 +5,10 @@ import Login from './components/Login';
 import Ticket from './components/Ticket';
 import SignUp from './components/signup';
 import StaffLoginPage from './components/StaffLoginPage'; // Update the import path
-import Nav from './components/Nav';
+import StaffLogin from './components/StaffLogin';
+import AdminLoginPage from './components/AdminLoginPage'; 
+import AdminLogin from './components/AdminLogin'; 
+import Newbuilding from './components/Newbuilding'; 
 
 const App = () => {
   return (
@@ -16,7 +19,12 @@ const App = () => {
         <Route path="/Login" element={<Login />} />
         <Route path="/Ticket" element={<Ticket />} />
         <Route path="/SignUp" element={<SignUp />} />
-        <Route path="/StaffLoginPage" element={<StaffLoginPage />} /> {/* Update the route path */}
+        <Route path="/StaffLoginPage" element={<StaffLoginPage />} />
+        <Route path="/StaffLogin" element={<StaffLogin />} />
+        <Route path="/AdminLoginPage" element={<AdminLoginPage />} />
+        <Route path="/AdminLogin" element={<AdminLogin />} />
+        <Route path="/Newbuilding" element={<Newbuilding />} />
+         {/* Update the route path */}
       </Routes>
     </div>
   );
