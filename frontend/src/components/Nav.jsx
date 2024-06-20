@@ -5,47 +5,109 @@ import { navLinks } from '../constants';
 import { hamburger } from '../assets/icons';
 import Dropdown from '../sections/dropdown';
 import { headerLogo } from '../assets/images'; // Import the headerLogo image
-
+import { dropdownlist } from '../constants';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { authActions } from '../store';
 const Nav = () => {
+  const dispatch = useDispatch()
+  const isLoggedIn = useSelector((state)=>state.isLoggedIn)
+ 
   const [isOpen, setOpen] = useState(false);
   const [isLoginOpen, setLoginOpen] = useState(false);
-  const location = useLocation();
+  const logout =()=>{
+    sessionStorage.clear("id")
+    dispatch(authActions.logout())
+}
 
 
 
   return (
     <header className="padding-x py-5 absolute z-10 w-full">
-     
-        <nav className="flex justify-between items-center max-container">
-          <Link to="/">
+    <nav className="flex justify-between items-center max-container">
+        <Link to="/">
             <img src={headerLogo} alt="Logo" width={180} height={60} /> {/* Include the header logo */}
           </Link>
-          <ul className="flex-1 flex justify-center items-center gap-16 max-lg:hidden relative">
-            {navLinks.map((item) => (
-              <li key={item.label} className="relative">
-                {item.dropdown ? (
-                  <div className="relative">
-                    <button
-                      onClick={() => setLoginOpen((prev) => !prev)}
-                      className="bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 font-montserrat leading-normal text-lg"
-                    >
-                      {item.label}
-                    </button>
-                    {isLoginOpen && <LoginDropdown dropdownLinks={item.dropdown} />}
-                  </div>
-                ) : (
-                  <a
-                    href={item.href}
+        <ul className="flex-1 flex justify-center items-center gap-16 max-lg:hidden relative">
+                  <li className="relative">
+                  <Link
+                    to="/"
                     className="bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 font-montserrat leading-normal text-lg"
                     onClick={() => setOpen(false)} // Close the dropdown when a link is clicked
                   >
-                    {item.label}
-                  </a>
-                )}
-              </li>
-            ))}
-          </ul>
-          <div className="hidden max-lg:block">
+                    Home
+                  </Link>
+                  </li>
+                  <li className="relative">
+                  <Link
+                    to="#about-us"
+                    className="bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 font-montserrat leading-normal text-lg"
+                    onClick={() => setOpen(false)} // Close the dropdown when a link is clicked
+                  >
+                    About Us
+                  </Link>
+                  </li>
+
+                  <li className="relative">
+                  <Link
+                    to="Ticket"
+                    className="bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 font-montserrat leading-normal text-lg"
+                    onClick={() => setOpen(false)} // Close the dropdown when a link is clicked
+                  >
+                    Help ticket
+                  </Link>
+                  </li>
+
+                  <li className="relative">
+                  <Link
+                    to="#contact-us"
+                    className="bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 font-montserrat leading-normal text-lg"
+                    onClick={() => setOpen(false)} // Close the dropdown when a link is clicked
+                  >
+                    Contact Us
+                  </Link>
+                  </li>
+                
+                  {!isLoggedIn && 
+                  <>
+                  <li className="relative">
+                    <div className="relative">
+                        <button
+                        onClick={() => setLoginOpen((prev) => !prev)}
+                        className="bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 font-montserrat leading-normal text-lg"
+                        >
+                        {dropdownlist.label}
+                        </button>
+                        {isLoginOpen && <LoginDropdown dropdownLinks={dropdownlist.dropdown} />}
+                    </div>
+                </li>
+
+                <li className="relative">
+                    <Link
+                    to="signUp"
+                    className="bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 font-montserrat leading-normal text-lg"
+                    onClick={() => setOpen(false)} // Close the dropdown when a link is clicked
+                  >
+                    Signup
+                  </Link>
+                  </li>
+                  </>
+                  }
+
+
+                  {isLoggedIn && 
+                  <li className="relative" onClick={logout}>
+                    <Link
+                    to="#"
+                    className="bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 font-montserrat leading-normal text-lg"
+                    onClick={logout} // Close the dropdown when a link is clicked
+                  >
+                    Logout
+                  </Link>
+                  </li>}
+                  
+        </ul>
+        <div className="hidden max-lg:block">
             <button onClick={() => setOpen((prev) => !prev)}>
               {!isOpen && (
                 <img src={hamburger} alt="Hamburger" width={25} height={25} />
@@ -53,9 +115,9 @@ const Nav = () => {
               {isOpen && <Dropdown />}
             </button>
           </div>
-        </nav>
-   
-    </header>
+
+</nav>
+</header>
   );
 };
 

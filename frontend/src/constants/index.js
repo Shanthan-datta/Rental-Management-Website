@@ -1,6 +1,18 @@
 import { facebook, instagram, shieldTick, support, truckFast, twitter } from "../assets/icons";
 import { bigShoe1, bigShoe2, bigShoe3, customer1, customer2, thumbnailShoe1, thumbnailShoe2, thumbnailShoe3, appartment1, appartment2, appartment3, appartment4 } from "../assets/images";
 
+export const dropdownlist = { 
+    
+        href: "#", 
+        label: "Login",
+        isButton: true,
+        dropdown: [
+            { href: "Login", label: "User Login" },
+            { href: "StaffLoginPage", label: "Staff Login" },
+            { href: "AdminLoginPage", label:"Admin Login" }
+        ]
+    
+    }
 export const navLinks = [
     { href: "/", label: "Home", isButton: true },
     

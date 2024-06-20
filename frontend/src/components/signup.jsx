@@ -1,13 +1,14 @@
 import React, { Component, useState } from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const SignUp =()=> {
+    const navigate = useNavigate()
     const [cfmPassword,setcfmPassword] = useState("")
 
     
     const [data, setdata] = useState({
-        firstName:"",
-        lastName:"",
+        fullName:"",
         email:"",
         contactNo:"",
         password:"",
@@ -31,15 +32,15 @@ const SignUp =()=> {
             .then((response)=>{
                 console.log(response)
                 setdata({
-                    firstName:"",
-                    lastName:"",
+                    fullName:"",
                     email:"",
                     contactNo:"",
                     password:"",
                     cfmPassword:"",
                     })
                     setcfmPassword("")
-                    alert("successfully registered")
+                    alert(response.data.message)
+                    navigate("/Login")
             })
             
         } else {
@@ -57,12 +58,8 @@ const SignUp =()=> {
             <h2 className='text-4xl font-bold text-center py-4'>3WayAssist</h2>
            
             <div className='flex flex-col mb-4 rounded-md'>
-                <label>First Name</label>
-                <input className='border relative bg-gray-100 p-2' value={data.firstName} name="firstName" onChange={update} type="text"  />
-            </div>
-            <div className='flex flex-col mb-4 rounded-md'>
-                <label>Last Name</label>
-                <input className='border relative bg-gray-100 p-2' value={data.lastName} name="lastName" onChange={update} type="text" />
+                <label>Full Name</label>
+                <input className='border relative bg-gray-100 p-2' value={data.fullName} name="fullName" onChange={update} type="text" />
             </div>
         
             <div className='flex flex-col mb-4 rounded-md'>

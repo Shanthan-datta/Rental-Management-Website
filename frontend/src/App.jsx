@@ -9,11 +9,21 @@ import StaffLogin from './components/StaffLogin';
 import AdminLoginPage from './components/AdminLoginPage'; 
 import AdminLogin from './components/AdminLogin'; 
 import Newbuilding from './components/Newbuilding'; 
+import { BrowserRouter } from 'react-router-dom'
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { authActions } from './store';
 
 const App = () => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    const id = sessionStorage.getItem("id")
+    if(id){dispatch(authActions.login())}
+  }, [])
+  
   return (
     <div>
-      
+      <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Login" element={<Login />} />
@@ -26,6 +36,7 @@ const App = () => {
         <Route path="/Newbuilding" element={<Newbuilding />} />
          {/* Update the route path */}
       </Routes>
+      </BrowserRouter>
     </div>
   );
 };
