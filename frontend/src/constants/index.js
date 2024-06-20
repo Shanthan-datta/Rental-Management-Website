@@ -5,7 +5,7 @@ export const navLinks = [
     { href: "/", label: "Home", isButton: true },
     
     { href: "#about-us", label: "About Us", isButton: true },
-    { href: "Ticket", label: "Report an Issue", isButton: true },
+    { href: "Ticket", label: "Help ticket", isButton: true },
     { href: "#contact-us", label: "Contact Us", isButton: true },
     { 
         href: "#", 
