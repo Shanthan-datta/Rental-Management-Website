@@ -1,14 +1,18 @@
 import React, { useState } from 'react'
 import axios from "axios"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+let id = sessionStorage.getItem("id")
+
+
 
 
 
 
 export default function Ticket() {
+    const [array, setarray] = useState([])
     
     const [form, setform] = useState({
-        name : '',
-        email: "",
         contactNo: '',
         flatNo: '',
         buildingName: '',
@@ -22,18 +26,21 @@ export default function Ticket() {
 
             setform({
               ...form,
-              [name]: value
+              [name]: value.trim()
             });
 
           };
           const aftersubmission = async (e)=>{
             e.preventDefault()
-            await axios.post("http://localhost:1000/api/v2/ticket", form)
-            .then((response)=>{
-                console.log(response)
+            const isFormIncomplete = Object.values(form).some(value => value.trim() === '');
+            if(isFormIncomplete){
+                toast.error("fill all the boxes")
+            }
+            else if(id){
+                
+                await axios.post("http://localhost:1000/api/v2/ticket", { contactNo: form.contactNo ,flatNo:form.flatNo, buildingName: form.buildingName , street:form.street, city:form.city , postalCode:form.postalCode, issue:form.issue,id:id}) 
+                setarray([...array,form])
                 setform({
-                    name : '',
-                    email: "",
                     contactNo: '',
                     flatNo: '',
                     buildingName: '',
@@ -41,37 +48,34 @@ export default function Ticket() {
                     city: '',
                     postalCode: '',
                     issue: ''
-                    })
-            })
+                })
+                toast.success("your ticket is added")
+            } else {
+                toast.error("please login to raise a ticket")
+            }
+
             
           }
 
   return (
-    
+    <>
+    <ToastContainer/>
     <div className='flex justify-center items-center h-full'>
          
-        <form className='max-w-[400px] w-full mx-auto bg-white p-8' >
+        <form className='max-w-[1000px] w-full mx-auto bg-white p-8' >
             <h2 className='text-4xl font-bold text-center py-4'>3WayAssist</h2>
             
-            <div className='flex flex-col mb-4'>
-                <label>Name</label>
-                <input className='border relative bg-gray-100 p-2' name="name" value={form.name} onChange={handleChange} type="text" required/>
-            </div>
-            <div className='flex flex-col mb-4'>
-                <label>Email</label>
-                <input className='border relative bg-gray-100 p-2' name="email" value={form.email} onChange={handleChange} type="text" required/>
-            </div>
             <div className='flex flex-col mb-4'>
                 <label>Contact No.</label>
                 <input className='border relative bg-gray-100 p-2' name="contactNo" value={form.contactNo}  onChange= {handleChange} type="tel" required/>
             </div>
             <div className='flex flex-col mb-4'>
-                <label>Flat Number</label>
-                <input className='border relative bg-gray-100 p-2' name="flatNo" value={form.flatNo} onChange= {handleChange} type="text" required />
-            </div>
-            <div className='flex flex-col mb-4'>
                 <label>Building Name</label>
                 <input className='border relative bg-gray-100 p-2' name="buildingName" value={form.buildingName} onChange= {handleChange} type="text" required/>
+            </div>
+            <div className='flex flex-col mb-4'>
+                <label>Flat Number</label>
+                <input className='border relative bg-gray-100 p-2' name="flatNo" value={form.flatNo} onChange= {handleChange} type="text" required />
             </div>
             <div className='flex flex-col mb-4'>
                 <label>Street</label>
@@ -94,7 +98,7 @@ export default function Ticket() {
             
         </form>
     </div>
-    
+        </>
   )
 }
 // import React from 'react'

@@ -1,13 +1,14 @@
 const router = require("express").Router()
 const User = require("../models/users")
 const ticketsList = require("../models/ticketslist")
-
+//add ticket
 router.post("/ticket", async (req,res)=>{
     try {
-        const { name,email,contactNo,flatNo, buildingName , street, city , postalCode, issue}=req.body
-        const existinguser = await User.findOne({email: req.body.email})
+        const {contactNo,flatNo, buildingName , street, city , postalCode, issue,id}=req.body
+        const existinguser = await User.findById(id)
+        
         if(existinguser){
-            const newticket = new ticketsList({ name,email,contactNo,flatNo, buildingName , street, city , postalCode, issue,users:existinguser})
+            const newticket = new ticketsList({ contactNo,flatNo, buildingName , street, city , postalCode, issue,users:existinguser})
             await newticket.save().then(()=>res.status(200).json({newticket}))
             existinguser.TicketsList.push(newticket)
             existinguser.save()
