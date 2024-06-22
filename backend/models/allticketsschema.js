@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-const ticketsList = new mongoose.Schema({
+const allTicketsList = new mongoose.Schema({
     name:{
         type: String,
         required: true,
@@ -37,12 +37,8 @@ const ticketsList = new mongoose.Schema({
         type: String,
         required: true,
     },
-    users:[{
-        type: mongoose.Types.ObjectId,
-        ref: "users" ,
-    }],
 
 },
 {timestamps: true}
 )
-module.exports = mongoose.model("ticketsList",ticketsList)
+module.exports = mongoose.model("allTicketsList",allTicketsList)
