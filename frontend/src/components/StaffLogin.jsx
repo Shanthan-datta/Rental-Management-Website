@@ -112,11 +112,13 @@ const StaffLogin = () => {
           >
             <Typography.Title level={4} style={titleStyle}>{issue.buildingName}</Typography.Title>
             <div>
-              <h3 style={textStyle}>{issue.issueName}</h3>
-              <p style={textStyle}>{issue.description}</p>
-              {issue.Address && (
+            <h3 style={textStyle}> <strong>Building Name:</strong> {issue.buildingName}</h3>
+              <p style={textStyle}><strong>Flat No:</strong> {issue.flatNo}</p>
+              <p style={textStyle}><strong>Contact No:</strong> {issue.contactNo}</p>
+              <p style={textStyle}><strong>Issue:</strong> {issue.issue}</p>
+              {(issue.street || issue.city || issue.postalCode) && (
                 <p style={textStyle}>
-                  {' '}
+                 
                   <span
                     style={{
                       display: 'inline-block',
@@ -128,7 +130,7 @@ const StaffLogin = () => {
                     }}
                     onClick={() => handleExpandAddress(index)}
                   >
-                    {issue.Address}
+                    {`${issue.street}, ${issue.city}, ${issue.postalCode}`}
                   </span>
                 </p>
               )}
