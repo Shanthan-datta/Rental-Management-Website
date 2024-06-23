@@ -112,22 +112,37 @@ export const services = [
 ];
 export const issues = [
     {
-      issueName: "Leakage",
-      buildingName: "Building A",
-      description: "Water leakage issue reported in Building A. Urgent attention required.",
-      Address: "Plotno-102 , RainbowVistas , Qaitallapur , Hyderabad , Telangana ssfdgfdhdhfxvxdvxbcfbfbdzvzvzvsdv "
+        name: "Jane Smith",
+        email: "jane.smith@example.com",
+        contactNo: "0987654321",
+        flatNo: "102",
+        buildingName: "ASBL Aspire",
+        street: "Second Street",
+        city: "Hyderabad",
+        postalCode: "500002",
+        issue: "Electrical failure in the living room"
     },
     {
-      issueName: "Electrical Failure",
-      buildingName: "Building B",
-      description: "Electrical failure reported in Building B. Lights not working in common areas.",
-      Address: "Plotno-104 , ASPL lakeside , kokapet , Hyderabad , Telangana "
+        name: "Jane Smith",
+        email: "jane.smith@example.com",
+        contactNo: "0987654321",
+        flatNo: "102",
+        buildingName: "ASBL Lake Side",
+        street: "Second Street",
+        city: "Hyderabad",
+        postalCode: "500002",
+        issue: "Electrical failure in the living room"
     },
     {
-      issueName: "HVAC Maintenance",
-      buildingName: "Building C",
-      description: "HVAC maintenance required in Building C. Temperature control issues observed.",
-      Address: "Plotno-105 , ASBL aspire , Gachibowli , Hyderabad , Telangana "
+        name: "Jane Smith",
+        email: "jane.smith@example.com",
+        contactNo: "0987654321",
+        flatNo: "102",
+        buildingName: "Marina Skies",
+        street: "Qaitallapur near idl lake",
+        city: "Hyderabad",
+        postalCode: "500002",
+        issue: "Electrical failure in the living room"
     },
     
   ];
