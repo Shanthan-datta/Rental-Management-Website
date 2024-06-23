@@ -115,16 +115,19 @@ export const issues = [
       issueName: "Leakage",
       buildingName: "Building A",
       description: "Water leakage issue reported in Building A. Urgent attention required.",
+      Address: "Plotno-102 , RainbowVistas , Qaitallapur , Hyderabad , Telangana ssfdgfdhdhfxvxdvxbcfbfbdzvzvzvsdv "
     },
     {
       issueName: "Electrical Failure",
       buildingName: "Building B",
       description: "Electrical failure reported in Building B. Lights not working in common areas.",
+      Address: "Plotno-104 , ASPL lakeside , kokapet , Hyderabad , Telangana "
     },
     {
       issueName: "HVAC Maintenance",
       buildingName: "Building C",
       description: "HVAC maintenance required in Building C. Temperature control issues observed.",
+      Address: "Plotno-105 , ASBL aspire , Gachibowli , Hyderabad , Telangana "
     },
     
   ];
