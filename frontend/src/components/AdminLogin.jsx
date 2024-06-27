@@ -1,19 +1,16 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Use useNavigate for React Router v6
-<<<<<<< HEAD
-import { Card, Typography, Button, Modal } from 'antd';
+
+import { Card, Typography, Button, Modal,Select  } from 'antd';
 import { products} from '../constants'; // Import the issues and products array from the correct path
 import PopularProductCard from '../components/PopularProductCard';
 import { useEffect } from 'react';
 import axios from 'axios';
-=======
-import { Card, Typography, Button, Modal, Select } from 'antd';
-import { products, issues } from '../constants'; // Import the issues and products array from the correct path
-import PopularProductCard from '../components/PopularProductCard';
+
 
 const { Option } = Select;
 
->>>>>>> 1fb2b86c663e72fe82a843ec8831ab579720732c
+
 const cardContainerStyle = {
   display: 'flex',
   flexDirection: 'row',
