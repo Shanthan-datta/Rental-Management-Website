@@ -1,10 +1,19 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Use useNavigate for React Router v6
+<<<<<<< HEAD
 import { Card, Typography, Button, Modal } from 'antd';
 import { products} from '../constants'; // Import the issues and products array from the correct path
 import PopularProductCard from '../components/PopularProductCard';
 import { useEffect } from 'react';
 import axios from 'axios';
+=======
+import { Card, Typography, Button, Modal, Select } from 'antd';
+import { products, issues } from '../constants'; // Import the issues and products array from the correct path
+import PopularProductCard from '../components/PopularProductCard';
+
+const { Option } = Select;
+
+>>>>>>> 1fb2b86c663e72fe82a843ec8831ab579720732c
 const cardContainerStyle = {
   display: 'flex',
   flexDirection: 'row',
@@ -58,6 +67,8 @@ const AdminLogin = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedIssue, setSelectedIssue] = useState(null);
   const [expandedIssue, setExpandedIssue] = useState(null);
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [selectedStaff, setSelectedStaff] = useState(null);
 
   const handleButtonClick = () => {
     navigate('/Newbuilding');
@@ -65,11 +76,17 @@ const AdminLogin = () => {
 
   const handleAssignTicket = (issue) => {
     setSelectedIssue(issue);
+    setDropdownVisible(true);
+  };
+
+  const handleStaffSelect = (staff) => {
+    setSelectedStaff(staff);
+    setDropdownVisible(false);
     setModalVisible(true);
   };
 
   const handleModalOk = () => {
-    console.log(`Assigning ticket for ${selectedIssue.issueName}`);
+    console.log(`Assigning ticket for ${selectedIssue.issueName} to ${selectedStaff}`);
     setModalVisible(false);
   };
 
@@ -163,14 +180,196 @@ const AdminLogin = () => {
         onCancel={handleModalCancel}
       >
         <Typography.Paragraph>
-          Are you sure you want to assign the ticket for {selectedIssue && selectedIssue.issueName}?
+          Are you sure you want to assign the ticket for {selectedIssue && selectedIssue.issueName} to {selectedStaff}?
         </Typography.Paragraph>
+      </Modal>
+
+      <Modal
+        title="Select Staff Member"
+        open={dropdownVisible}
+        onCancel={() => setDropdownVisible(false)}
+        footer={null}
+      >
+        <Select
+          showSearch
+          style={{ width: '100%' }}
+          placeholder="Select a staff member"
+          optionFilterProp="children"
+          onChange={handleStaffSelect}
+          filterOption={(input, option) =>
+            option.children.toLowerCase().includes(input.toLowerCase())
+          }
+        >
+          <Option value="Staff Member 1">Staff Member 1</Option>
+          <Option value="Staff Member 2">Staff Member 2</Option>
+          <Option value="Staff Member 3">Staff Member 3</Option>
+          <Option value="Staff Member 4">Staff Member 4</Option>
+        </Select>
       </Modal>
     </div>
   );
 };
 
 export default AdminLogin;
+
+// import React, { useState } from 'react';
+// import { useNavigate } from 'react-router-dom'; // Use useNavigate for React Router v6
+// import { Card, Typography, Button, Modal } from 'antd';
+// import { products, issues } from '../constants'; // Import the issues and products array from the correct path
+// import PopularProductCard from '../components/PopularProductCard';
+
+// const cardContainerStyle = {
+//   display: 'flex',
+//   flexDirection: 'row',
+//   flexWrap: 'wrap',
+//   gap: '16px',
+// };
+
+// const cardStyle = {
+//   flex: '0 0 calc(50% - 16px)', // Adjust width to fit two cards side by side with margin
+//   border: '1px solid black', // Add border
+//   borderRadius: '8px',
+//   backgroundColor: 'white',
+//   padding: '16px',
+// };
+
+// const buttonStyle = {
+//   backgroundColor: 'purple',
+//   color: 'white',
+//   transition: 'background-color 0.3s ease-in-out',
+//   border: 'none',
+//   borderRadius: '4px',
+//   padding: '8px 16px',
+//   marginTop: '8px',
+// };
+
+// const titleStyle = {
+//   color: 'black',
+//   marginBottom: '16px',
+// };
+
+// const textStyle = {
+//   color: 'black',
+// };
+
+// const AdminLogin = () => {
+//   const navigate = useNavigate();
+//   const [modalVisible, setModalVisible] = useState(false);
+//   const [selectedIssue, setSelectedIssue] = useState(null);
+//   const [expandedIssue, setExpandedIssue] = useState(null);
+
+//   const handleButtonClick = () => {
+//     navigate('/Newbuilding');
+//   };
+
+//   const handleAssignTicket = (issue) => {
+//     setSelectedIssue(issue);
+//     setModalVisible(true);
+//   };
+
+//   const handleModalOk = () => {
+//     console.log(`Assigning ticket for ${selectedIssue.issueName}`);
+//     setModalVisible(false);
+//   };
+
+//   const handleModalCancel = () => {
+//     setModalVisible(false);
+//   };
+
+//   const handleExpandAddress = (index) => {
+//     setExpandedIssue(expandedIssue === index ? null : index);
+//   };
+
+//   return (
+//     <div className="max-container max-sm:mt-12 p-4">
+//       <section id="products">
+//         <div className="flex flex-col justify-start gap-5">
+//           <div className="flex justify-between items-center">
+//             <h2 className="text-4xl font-palanquin font-bold">
+//               Available <span className="text-purple-800">Flats</span>
+//             </h2>
+//             <button
+//               onClick={handleButtonClick}
+//               className="bg-purple-500 text-white py-2 px-4 rounded transition duration-300 ease-in-out hover:bg-purple-700"
+//             >
+//               Add Building
+//             </button>
+//           </div>
+//         </div>
+//         <div className="flex mt-16 flex-row flex-shrink-0 gap-4 py-2 overflow-x-auto scrollbar-webkit scrollbar-thin">
+//           {products.map((product) => (
+//             <PopularProductCard key={product.name} {...product} />
+//           ))}
+//         </div>
+//       </section>
+
+//       <Typography.Title level={2} style={{ marginTop: '32px' }}>Pending Tickets and Issues</Typography.Title>
+
+//       <div style={cardContainerStyle}>
+//         {issues.map((issue, index) => (
+//           <Card
+//             key={index}
+//             hoverable
+//             style={cardStyle}
+//             bodyStyle={{
+//               padding: 16,
+//               display: 'flex',
+//               flexDirection: 'column',
+//               alignItems: 'flex-start',
+//             }}
+//           >
+//             <Typography.Title level={4} style={titleStyle}>{issue.buildingName}</Typography.Title>
+//             <div>
+//               <h3 style={textStyle}> <strong>Building Name:</strong> {issue.buildingName}</h3>
+//               <p style={textStyle}><strong>Flat No:</strong> {issue.flatNo}</p>
+//               <p style={textStyle}><strong>Contact No:</strong> {issue.contactNo}</p>
+//               <p style={textStyle}><strong>Issue:</strong> {issue.issue}</p>
+//               {(issue.street || issue.city || issue.postalCode) && (
+//                 <p style={textStyle}>
+                 
+//                   <span
+//                     style={{
+//                       display: 'inline-block',
+//                       maxWidth: expandedIssue === index ? 'none' : '150px', // Adjust max-width as needed
+//                       whiteSpace: expandedIssue === index ? 'normal' : 'nowrap',
+//                       overflow: expandedIssue === index ? 'visible' : 'hidden',
+//                       textOverflow: expandedIssue === index ? 'clip' : 'ellipsis',
+//                       cursor: 'pointer',
+//                     }}
+//                     onClick={() => handleExpandAddress(index)}
+//                   >
+//                     {`${issue.street}, ${issue.city}, ${issue.postalCode}`}
+//                   </span>
+//                 </p>
+//               )}
+//             </div>
+//             <Button
+//               type="primary"
+//               className="mt-2"
+//               style={buttonStyle}
+//               onClick={() => handleAssignTicket(issue)}
+//             >
+//               Assign Ticket
+//             </Button>
+//           </Card>
+//         ))}
+//       </div>
+
+//       <Modal
+//         title="Assign Ticket"
+//         open={modalVisible}
+//         onOk={handleModalOk}
+//         onCancel={handleModalCancel}
+//       >
+//         <Typography.Paragraph>
+//           Are you sure you want to assign the ticket for {selectedIssue && selectedIssue.issueName}?
+//         </Typography.Paragraph>
+//       </Modal>
+//     </div>
+//   );
+// };
+
+// export default AdminLogin;
 
 // import React, { useState } from 'react';
 // import { useNavigate } from 'react-router-dom'; // Use useNavigate for React Router v6
