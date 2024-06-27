@@ -37,6 +37,10 @@ const allTicketsList = new mongoose.Schema({
         type: String,
         required: true,
     },
+    users:[{
+        type: mongoose.Types.ObjectId,
+        ref: "users" ,
+    }],
 
 },
 {timestamps: true}

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Use useNavigate for React Router v6
 import { Card, Typography, Button, Modal } from 'antd';
-import { products, issues } from '../constants'; // Import the issues and products array from the correct path
+import { products} from '../constants'; // Import the issues and products array from the correct path
 import PopularProductCard from '../components/PopularProductCard';
-
+import { useEffect } from 'react';
+import axios from 'axios';
 const cardContainerStyle = {
   display: 'flex',
   flexDirection: 'row',
@@ -39,6 +40,20 @@ const textStyle = {
 };
 
 const AdminLogin = () => {
+  const [tickets, setTickets] = useState([]);
+
+  useEffect(() => {
+      const fetchTickets = async () => {
+          try {
+              const response = await axios.get('http://localhost:1000/api/allList/allTickets');
+              setTickets(response.data.ticketslist);
+          } catch (error) {
+              console.error("There was an error fetching the tickets!", error);
+          }
+      };
+
+      fetchTickets();
+  }, []);
   const navigate = useNavigate();
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedIssue, setSelectedIssue] = useState(null);
@@ -92,7 +107,7 @@ const AdminLogin = () => {
       <Typography.Title level={2} style={{ marginTop: '32px' }}>Pending Tickets and Issues</Typography.Title>
 
       <div style={cardContainerStyle}>
-        {issues.map((issue, index) => (
+        {tickets.map((issue, index) => (
           <Card
             key={index}
             hoverable

@@ -21,11 +21,14 @@ router.post("/ticket", async (req,res)=>{
 
 
 //delete tickets
-router.delete("/deleteticket/:id", async (req,res)=>{
+router.delete("/deleteTicket/:id", async (req,res)=>{
     try {
-        const { email }=req.body
-        const existinguser = await User.findOne({email})
+        const ticketId = req.params.id;
+        const { id }=req.body
+        const existinguser = await User.findById(id)
         if(existinguser){
+            existinguser.TicketsList = existinguser.TicketsList.filter(ticket => ticket.toString() !== ticketId);
+            await existinguser.save();
             const ticket = await ticketsList.findByIdAndDelete(req.params.id).
             then(()=>res.status(200).json({message: "task deleted"}))
         }

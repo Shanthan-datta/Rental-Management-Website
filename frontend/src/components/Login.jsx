@@ -32,6 +32,7 @@ const submit=async(e)=>{
         sessionStorage.setItem("id",response.data.others._id)
         dispatch(authActions.login())
         navigate("/")
+
         
     }
   
@@ -41,7 +42,6 @@ const submit=async(e)=>{
   return (
     
     
-
     <div className='flex justify-center items-center h-full'>
         <form className='max-w-[400px] w-full mx-auto bg-white p-8'>
             <h2 className='text-4xl font-bold text-center py-4'>3WayAssist</h2>

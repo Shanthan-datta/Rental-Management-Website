@@ -38,7 +38,7 @@ export default function Ticket() {
             }
             else if(id){
                 
-                await axios.post("http://localhost:1000/api/v2/ticket", { contactNo: form.contactNo ,flatNo:form.flatNo, buildingName: form.buildingName , street:form.street, city:form.city , postalCode:form.postalCode, issue:form.issue,id:id}) 
+                await axios.post("http://localhost:1000/api/allList/addTickets", { contactNo: form.contactNo ,flatNo:form.flatNo, buildingName: form.buildingName , street:form.street, city:form.city , postalCode:form.postalCode, issue:form.issue,id:id}) 
                 setarray([...array,form])
                 setform({
                     contactNo: '',
