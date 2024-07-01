@@ -9,7 +9,7 @@ router.post("/addTickets", async (req, res) => {
         const existingUser = await User.findById(id);
         console.log(existingUser)
         if (existingUser) {
-            console.log("pedda error")
+
             const newTicket = new AllTickets({
                 name: existingUser.fullName,
                 email: existingUser.email,

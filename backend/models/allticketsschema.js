@@ -30,7 +30,7 @@ const allTicketsList = new mongoose.Schema({
         required: true,
     },
     postalCode: {
-        type: Number,
+        type: String,
         required: true,
     },
     issue:{

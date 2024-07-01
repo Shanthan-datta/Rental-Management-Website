@@ -21,25 +21,26 @@ router.post("/register", async (req,res)=>{
 //signup
 
 //login
-router.post("/Login", async (req,res)=>{
+router.post("/Login", async (req, res) => {
     try {
-        const useremail = await User.findOne({email: req.body.email})
-     
-        if(!(useremail)){
-            res.status(200).json({message: "please sign up first"})
-        }
-        const checkpassword = bcrypt.compareSync(
-            req.body.password,
-            useremail.password)
-            if(!checkpassword){
-                res.status(200).json({message: "wrong password"})
-            }
-            const {password, ...others} = useremail._doc
-            res.status(200).json({others})
+      const useremail = await User.findOne({ email: req.body.email });
+  
+      if (!useremail) {
+        return res.status(404).json({ message: "User not found. Please sign up first." });
+      }
+  
+      const checkpassword = bcrypt.compareSync(req.body.password, useremail.password);
+      if (!checkpassword) {
+        return res.status(401).json({ message: "Incorrect password." });
+      }
+  
+      const { password, ...others } = useremail._doc;
+      res.status(200).json({ others });
     } catch (error) {
-        res.status(200).json({message: "error"})
+      res.status(500).json({ message: "Server error" });
     }
-})
+  });
+  
 
 
 
