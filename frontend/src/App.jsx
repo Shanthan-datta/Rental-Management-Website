@@ -13,6 +13,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { authActions } from './store';
+import StaffEnroll from './components/StaffEnroll';
 
 const App = () => {
   const dispatch = useDispatch()
@@ -34,6 +35,7 @@ const App = () => {
         <Route path="/AdminLoginPage" element={<AdminLoginPage />} />
         <Route path="/AdminLogin" element={<AdminLogin />} />
         <Route path="/Newbuilding" element={<Newbuilding />} />
+        <Route path="/StaffEnroll" element={<StaffEnroll />} />
          {/* Update the route path */}
       </Routes>
       </BrowserRouter>
