@@ -19,6 +19,7 @@ const Nav = () => {
   const logout = () => {
     sessionStorage.clear('id');
     dispatch(authActions.logout());
+    
   };
 
   return (
