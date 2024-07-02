@@ -146,6 +146,13 @@ export const issues = [
     },
     
   ];
+  export const staffMembers = [
+    { id: 1, name: 'StaffMember 1', work: 'Plumber' },
+    { id: 2, name: 'StaffMember 2', work: 'Electrician' },
+    { id: 3, name: 'StaffMember 3', work: 'Carpenter' },
+    { id: 4, name: 'StaffMember 4', work: 'Cleaner' },
+  ];
+  
   
 
 export const reviews = [
