@@ -317,59 +317,6 @@ const AdminLogin = () => {
             </Button>
           </Card>
         ))}
-
-        <Card
-          hoverable
-          style={cardStyle}
-          bodyStyle={{
-            padding: 16,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-            position: 'relative',
-          }}
-        >
-          <Typography.Title level={4} style={titleStyle}>
-            Sample Building
-          </Typography.Title>
-          <div>
-            <h3 style={textStyle}>
-              <strong>Building Name:</strong> Sample Building
-            </h3>
-            <p style={textStyle}>
-              <strong>Flat No:</strong> 101
-            </p>
-            <p style={textStyle}>
-              <strong>Contact No:</strong> 1234567890
-            </p>
-            <p style={textStyle}>
-              <strong>Issue:</strong> Plumbing issue
-            </p>
-            <p style={textStyle}>
-              <span
-                style={{
-                  display: 'inline-block',
-                  maxWidth: expandedIssue === 'sample' ? 'none' : '150px',
-                  whiteSpace: expandedIssue === 'sample' ? 'normal' : 'nowrap',
-                  overflow: expandedIssue === 'sample' ? 'visible' : 'hidden',
-                  textOverflow: expandedIssue === 'sample' ? 'clip' : 'ellipsis',
-                  cursor: 'pointer',
-                }}
-                onClick={() => handleExpandAddress('sample')}
-              >
-                123 Main St, City, 12345
-              </span>
-            </p>
-          </div>
-          <Button
-            type="primary"
-            className="mt-2"
-            style={centeredButtonStyle}
-            onClick={() => handleAssignTicket({ buildingName: 'Sample Building' })}
-          >
-            Assign Ticket
-          </Button>
-        </Card>
       </div>
 
       <Typography.Title level={2} style={{ marginTop: '32px' }}>
@@ -430,63 +377,12 @@ const AdminLogin = () => {
               style={buttonStyle}
               onClick={() => handleAssignTicket(completedIssue)}
             >
-              Assign Ticket
+              view photo
             </Button>
           </Card>
         ))}
 
-        <Card
-          hoverable
-          style={cardStyle}
-          bodyStyle={{
-            padding: 16,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-            position: 'relative',
-          }}
-        >
-          <Typography.Title level={4} style={titleStyle}>
-            Sample Completed Building
-          </Typography.Title>
-          <div>
-            <h3 style={textStyle}>
-              <strong>Building Name:</strong> Sample Completed Building
-            </h3>
-            <p style={textStyle}>
-              <strong>Flat No:</strong> 202
-            </p>
-            <p style={textStyle}>
-              <strong>Contact No:</strong> 9876543210
-            </p>
-            <p style={textStyle}>
-              <strong>Issue:</strong> Electrical issue
-            </p>
-            <p style={textStyle}>
-              <span
-                style={{
-                  display: 'inline-block',
-                  maxWidth: expandedIssue === 'sample-completed' ? 'none' : '150px',
-                  whiteSpace: expandedIssue === 'sample-completed' ? 'normal' : 'nowrap',
-                  overflow: expandedIssue === 'sample-completed' ? 'visible' : 'hidden',
-                  textOverflow: expandedIssue === 'sample-completed' ? 'clip' : 'ellipsis',
-                  cursor: 'pointer',
-                }}
-                onClick={() => handleExpandAddress('sample-completed')}
-              >
-                456 Oak St, Town, 54321
-              </span>
-            </p>
-          </div>
-          <Button
-            type="primary"
-            className="mt-1 mb-0"
-            style={centeredButtonStyle}
-            onClick={() => handleViewPhoto({ buildingName: 'Sample Completed Building' })}
-          >
-            View Photo
-          </Button>
-        </Card>
+        
       </div>
 
       <Modal
