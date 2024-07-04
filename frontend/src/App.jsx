@@ -18,8 +18,16 @@ import StaffEnroll from './components/StaffEnroll';
 const App = () => {
   const dispatch = useDispatch()
   useEffect(() => {
-    const id = sessionStorage.getItem("id")
+    const id = localStorage.getItem("id")
     if(id){dispatch(authActions.login())}
+  }, [])
+  useEffect(() => {
+    const staffid = localStorage.getItem("staffLoginId")
+    if(staffid){dispatch(authActions.staffLogin())}
+  }, [])
+  useEffect(() => {
+    const adminid = localStorage.getItem("adminLoginId")
+    if(adminid){dispatch(authActions.adminLogin())}
   }, [])
   
   return (
@@ -30,10 +38,10 @@ const App = () => {
         <Route path="/Login" element={<Login />} />
         <Route path="/Ticket" element={<Ticket />} />
         <Route path="/SignUp" element={<SignUp />} />
-        <Route path="/StaffLoginPage" element={<StaffLoginPage />} />
-        <Route path="/StaffLogin" element={<StaffLogin />} />
-        <Route path="/AdminLoginPage" element={<AdminLoginPage />} />
-        <Route path="/AdminLogin" element={<AdminLogin />} />
+        <Route path="/StaffLogin" element={<StaffLoginPage />} />
+        <Route path="/Staff" element={<StaffLogin />} />
+        <Route path="/AdminLogin" element={<AdminLoginPage />} />
+        <Route path="/Admin" element={<AdminLogin />} />
         <Route path="/Newbuilding" element={<Newbuilding />} />
         <Route path="/StaffEnroll" element={<StaffEnroll />} />
          {/* Update the route path */}

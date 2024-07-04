@@ -18,7 +18,7 @@ export default function Ticket() {
 
   // Load id from session storage when component mounts
   useEffect(() => {
-    const sessionId = sessionStorage.getItem('id');
+    const sessionId = localStorage.getItem('id');
     if (sessionId) {
       setId(sessionId);
     }

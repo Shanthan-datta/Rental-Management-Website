@@ -40,6 +40,9 @@ router.post("/Login", async (req, res) => {
       res.status(500).json({ message: "Server error" });
     }
   });
+  router.post("/login", async (req,res)=>{
+    
+  });
   
 
 

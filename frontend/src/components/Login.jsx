@@ -2,8 +2,9 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { authActions } from '../store';
+
 
 function Login() {
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ function Login() {
     setError(""); // Reset error message
     try {
       const response = await axios.post("http://localhost:1000/api/v1/Login", data);
-      sessionStorage.setItem("id", response.data.others._id);
+      localStorage.setItem("id", response.data.others._id);
       
       dispatch(authActions.login());
       navigate("/");

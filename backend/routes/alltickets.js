@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const User = require("../models/users");
 const AllTickets = require("../models/allticketsschema");
+const Staff = require("../models/staff")
 // creates new ticket
 router.post("/addTickets", async (req, res) => {
     try {
@@ -20,6 +21,7 @@ router.post("/addTickets", async (req, res) => {
                 city,
                 postalCode,
                 issue,
+                status:"pending",
                 users:existingUser,
             });
 
@@ -37,12 +39,54 @@ router.post("/addTickets", async (req, res) => {
     }
 });
 //fetches all tickets
-router.get("/allTickets", async (req, res) => {
+router.get("/pendingtickets", async (req, res) => {
     try {
-        const ticketslist = await AllTickets.find().sort({ createdAt: -1 });
+        const ticketslist = await AllTickets.find({ status: "pending" }).sort({ createdAt: -1 });
         res.status(200).json({ ticketslist });
     } catch (error) {
-        res.status(500).json({ error: "An error occurred while fetching tickets." });
+        console.error("Error fetching pending tickets:", error);
+        res.status(500).json({ error: "An error occurred while fetching pending tickets." });
+    }
+});
+router.get("/completedtickets", async (req, res) => {
+    try {
+        const ticketslist = await AllTickets.find({ status: "completed" }).sort({ createdAt: -1 });
+        res.status(200).json({ ticketslist });
+    } catch (error) {
+        console.error("Error fetching completed tickets:", error);
+        res.status(500).json({ error: "An error occurred while fetching completed tickets." });
+    }
+});
+router.post("/assign", async (req, res) => {
+    const { staffId, ticketId } = req.body;
+
+    try {
+        // Find staff by ID
+        const staff = await Staff.findById(staffId);
+        if (!staff) {
+            return res.status(404).json({ error: "Staff not found" });
+        }
+
+        // Find ticket by ID
+        const ticket = await AllTickets.findById(ticketId);
+        if (!ticket) {
+            return res.status(404).json({ error: "Ticket not found" });
+        }
+
+        // Update staff's ticketsList with ticketId
+        staff.TicketsList.push(ticketId);
+        await staff.save();
+
+        // Update ticket status to "assigned"
+        ticket.status = "assigned";
+        ticket.assigned = staffId
+        await ticket.save();
+
+        // Send success response
+        res.status(200).json({ message: "Assignment successful",});
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Internal server error" });
     }
 });
 

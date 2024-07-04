@@ -1,108 +1,75 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from 'react-redux';
+import { authActions } from '../store';
 function StaffLoginPage() {
-    const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [form, setForm] = useState({
+    email: '',
+    staffId: '',
+  });
 
-    const handleSignIn = (e) => {
-        e.preventDefault();
-        // Add your login logic here
-        // Assuming successful login, navigate to the StaffLogin page
-        navigate('/StaffLogin');
-    };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm({
+      ...form,
+      [name]: value
+    });
+  };
 
-    return (
-        <div className='flex justify-center items-center h-full'>
-            <form className='max-w-[400px] w-full mx-auto bg-white p-8' onSubmit={handleSignIn}>
-                <h2 className='text-4xl font-bold text-center py-4'>3WayAssist Staff</h2>
-                <div className='flex flex-col mb-4'>
-                    <label>Name</label>
-                    <input className='border relative bg-gray-100 p-2 rounded-md' type="text" />
-                </div>
-                <div className='flex flex-col'>
-                    <label>Password</label>
-                    <input className='border relative bg-gray-100 p-2 rounded-md' type="password" />
-                </div>
-                <button className='w-full py-3 mt-8 bg-purple-900 hover:bg-purple-600 relative text-white rounded-md' type="submit">
-                    Sign In
-                </button>
-            </form>
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post("http://localhost:1000/api/v3/login", form);
+      toast.success(response.data.message);
+      localStorage.setItem("staffLoginId", response.data.id);
+      dispatch(authActions.staffLogin());
+      navigate('/staff');
+    } catch (error) {
+      if (error.response && error.response.data) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("An error occurred. Please try again.");
+      }
+    }
+  };
+
+  return (
+    <div className='flex justify-center items-center h-full'>
+      <form className='max-w-[400px] w-full mx-auto bg-white p-8' onSubmit={handleSignIn}>
+        <h2 className='text-4xl font-bold text-center py-4'>3WayAssist Staff</h2>
+        <div className='flex flex-col mb-4'>
+          <label>Email</label>
+          <input
+            className='border relative bg-gray-100 p-2 rounded-md'
+            type="text"
+            name='email'
+            value={form.email}
+            onChange={handleChange}
+          />
         </div>
-    );
+        <div className='flex flex-col'>
+          <label>Staff ID</label>
+          <input
+            className='border relative bg-gray-100 p-2 rounded-md'
+            type="password"
+            name='staffId'
+            value={form.staffId}
+            onChange={handleChange}
+          />
+        </div>
+        <button className='w-full py-3 mt-8 bg-purple-900 hover:bg-purple-600 relative text-white rounded-md' type="submit">
+          Sign In
+        </button>
+      </form>
+      <ToastContainer />
+    </div>
+  );
 }
 
 export default StaffLoginPage;
-
-// import React from 'react';
-// import { useNavigate } from 'react-router-dom';
-
-// function StaffLoginPage() {
-//     const navigate = useNavigate();
-
-//     const handleSignIn = (e) => {
-//         e.preventDefault();
-//         // Add your login logic here
-//         navigate('/StaffLogin'); // Navigate to the original StaffLogin page
-//     };
-
-//     return (
-//         <div className='flex justify-center items-center h-full'>
-//             <form className='max-w-[400px] w-full mx-auto bg-white p-8' onSubmit={handleSignIn}>
-//                 <h2 className='text-4xl font-bold text-center py-4'>3WayAssist Staff</h2>
-//                 <div className='flex flex-col mb-4'>
-//                     <label>Name</label>
-//                     <input className='border relative bg-gray-100 p-2 rounded-md' type="text" />
-//                 </div>
-//                 <div className='flex flex-col'>
-//                     <label>Password</label>
-//                     <input className='border relative bg-gray-100 p-2 rounded-md' type="password" />
-//                 </div>
-//                 <button className='w-full py-3 mt-8 bg-purple-900 hover:bg-purple-600 relative text-white rounded-md' type="submit">
-//                     Sign In
-//                 </button>
-//             </form>
-//         </div>
-//     );
-// }
-
-// export default StaffLoginPage;
-
-
-
-// import React from 'react'
-// import { useNavigate } from 'react-router-dom'
-
-
-  
-
-    
-// function StaffLoginPage  () {
-//     const nagivate = useNavigate()
-//     const goToSignUP = () => {
-//       nagivate('/StaffLogin')
-//   }
-    
-//   return (
-
-//     <div className='flex justify-center items-center h-full'>
-//         <form className='max-w-[400px] w-full mx-auto bg-white p-8'>
-//             <h2 className='text-4xl font-bold text-center py-4'>3WayAssist Staff</h2>
-           
-//             <div className='flex flex-col mb-4'>
-//                 <label>Name </label>
-//                 <input className='border relative bg-gray-100 p-2 rounded-md' type="text" />
-//             </div>
-//             <div className='flex flex-col '>
-//                 <label>Password</label>
-//                 <input className='border relative bg-gray-100 p-2 rounded-md' type="password" />
-//             </div>
-//             <button className='w-full py-3 mt-8 bg-purple-900 hover:bg-purple-600 relative text-white rounded-md' onClick={()=> goToSignUP()}>Sign In</button>
-         
-            
-             
-//         </form>
-//     </div>
-    
-//   )
-// }
-// export default Login
