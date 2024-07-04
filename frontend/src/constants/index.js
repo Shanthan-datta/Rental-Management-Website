@@ -8,8 +8,8 @@ export const dropdownlist = {
         isButton: true,
         dropdown: [
             { href: "Login", label: "User Login" },
-            { href: "StaffLoginPage", label: "Staff Login" },
-            { href: "AdminLoginPage", label:"Admin Login" }
+            { href: "StaffLogin", label: "Staff Login" },
+            { href: "AdminLogin", label:"Admin Login" }
         ]
     
     }
@@ -26,8 +26,8 @@ export const navLinks = [
         isButton: true,
         dropdown: [
             { href: "Login", label: "User Login" },
-            { href: "StaffLoginPage", label: "Staff Login" },
-            { href: "AdminLoginPage", label:"Admin Login" }
+            { href: "StaffLogin", label: "Staff Login" },
+            { href: "AdminLogin", label:"Admin Login" }
         ]
     },
     { href: "signUp", label: "Signup", isButton: true },
@@ -39,8 +39,8 @@ export const Login = [
         label: "Login", 
         dropdown: [
             { href: "Login", label:"User Login" },
-            { href: "StaffLoginPage", label:"Staff Login" },
-            { href: "AdminLoginPage", label:"Admin Login" }
+            { href: "StaffLogin", label:"Staff Login" },
+            { href: "AdminLogin", label:"Admin Login" }
         ]
     }
 ];

@@ -1,9 +1,17 @@
 const mongoose = require("mongoose")
-const users = new mongoose.Schema({
+const Staff = new mongoose.Schema({
     
     fullName:{
         type: String,
         required:true,
+    },
+    staffId:{
+        type: String,
+        required: true,
+    },
+    work:{
+        type: String,
+        required: true,
     },
     email: {
         type: String,
@@ -15,14 +23,11 @@ const users = new mongoose.Schema({
         unique: true,
         required:true,
     },
-    password:{
-        type: String,
-        required: true,
-    },
+
     
     TicketsList:[{
         type: mongoose.Types.ObjectId,
-        ref: "allTicketsList" ,
+        ref: "ticketsList" ,
     }]
 })
-module.exports = mongoose.model("users", users)
+module.exports = mongoose.model("staff", Staff)

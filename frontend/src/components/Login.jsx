@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { authActions } from '../store';
+
 
 function Login() {
   const dispatch = useDispatch();
@@ -33,10 +34,9 @@ function Login() {
     setError(""); // Reset error message
     try {
       const response = await axios.post("http://localhost:1000/api/v1/Login", data);
-      const userId = response.data.others._id;
-      localStorage.setItem("user", userId);
-      localStorage.setItem("isLoggedIn", "true");
-      dispatch(authActions.login(userId));
+      localStorage.setItem("id", response.data.others._id);
+      
+      dispatch(authActions.login());
       navigate("/");
     } catch (err) {
       if (err.response && err.response.data) {
@@ -46,13 +46,6 @@ function Login() {
       }
     }
   };
-
-  useEffect(() => {
-    if (localStorage.getItem("isLoggedIn") === "true") {
-      const userId = localStorage.getItem("user");
-      dispatch(authActions.login(userId));
-    }
-  }, [dispatch]);
 
   return (
     <div className='flex justify-center items-center h-full'>

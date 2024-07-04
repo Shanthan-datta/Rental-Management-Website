@@ -17,7 +17,7 @@ const Nav = () => {
   const [isLoginOpen, setLoginOpen] = useState(false);
 
   const logout = () => {
-    sessionStorage.clear('id');
+    localStorage.clear('id');
     dispatch(authActions.logout());
   };
 
@@ -272,7 +272,7 @@ export default Nav;
 //   const [isOpen, setOpen] = useState(false);
 //   const [isLoginOpen, setLoginOpen] = useState(false);
 //   const logout =()=>{
-//     sessionStorage.clear("id")
+//     localStorage.clear("id")
 //     dispatch(authActions.logout())
 // }
 
