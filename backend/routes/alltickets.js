@@ -51,7 +51,7 @@ router.get("/pendingtickets", async (req, res) => {
 router.get("/completedtickets", async (req, res) => {
     try {
         const ticketslist = await AllTickets.find({ status: "completed" }).sort({ createdAt: -1 });
-        res.status(200).json({ ticketslist });
+        res.status(200).json({ completedTickets });
     } catch (error) {
         console.error("Error fetching completed tickets:", error);
         res.status(500).json({ error: "An error occurred while fetching completed tickets." });
