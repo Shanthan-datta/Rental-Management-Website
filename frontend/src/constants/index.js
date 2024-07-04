@@ -19,6 +19,7 @@ export const navLinks = [
     { href: "#about-us", label: "About Us", isButton: true },
     { href: "Ticket", label: "Help ticket", isButton: true },
     { href: "#contact-us", label: "Contact Us", isButton: true },
+
     { 
         href: "#", 
         label: "Login",
@@ -29,7 +30,8 @@ export const navLinks = [
             { href: "AdminLoginPage", label:"Admin Login" }
         ]
     },
-    { href: "signUp", label: "Signup", isButton: true }
+    { href: "signUp", label: "Signup", isButton: true },
+    { href: "MyTickets", label: "MyTickets", isButton: true }
 ];
 
 export const Login = [

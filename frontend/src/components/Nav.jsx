@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
+import { Link as ScrollLink } from 'react-scroll';
 import LoginDropdown from '../components/LoginDropdown';
 import { navLinks } from '../constants';
 import { hamburger } from '../assets/icons';
 import Dropdown from '../sections/dropdown';
-import { headerLogo } from '../assets/images'; // Import the headerLogo image
+import { headerLogo } from '../assets/images';
 import { dropdownlist } from '../constants';
 import { useSelector, useDispatch } from 'react-redux';
 import { authActions } from '../store';
@@ -19,21 +19,20 @@ const Nav = () => {
   const logout = () => {
     sessionStorage.clear('id');
     dispatch(authActions.logout());
-    
   };
 
   return (
     <header className="padding-x py-5 absolute z-10 w-full">
       <nav className="flex justify-between items-center max-container">
         <RouterLink to="/">
-          <img src={headerLogo} alt="Logo" width={180} height={60} /> {/* Include the header logo */}
+          <img src={headerLogo} alt="Logo" width={180} height={60} />
         </RouterLink>
         <ul className="flex-1 flex justify-center items-center gap-16 max-lg:hidden relative">
           <li className="relative">
             <RouterLink
               to="/"
               className="bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 font-montserrat leading-normal text-lg"
-              onClick={() => setOpen(false)} // Close the dropdown when a link is clicked
+              onClick={() => setOpen(false)}
             >
               Home
             </RouterLink>
@@ -44,7 +43,7 @@ const Nav = () => {
               smooth={true}
               duration={500}
               className="cursor-pointer bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 font-montserrat leading-normal text-lg"
-              onClick={() => setOpen(false)} // Close the dropdown when a link is clicked
+              onClick={() => setOpen(false)}
             >
               About Us
             </ScrollLink>
@@ -53,7 +52,7 @@ const Nav = () => {
             <RouterLink
               to="/ticket"
               className="bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 font-montserrat leading-normal text-lg"
-              onClick={() => setOpen(false)} // Close the dropdown when a link is clicked
+              onClick={() => setOpen(false)}
             >
               Help Ticket
             </RouterLink>
@@ -64,7 +63,7 @@ const Nav = () => {
               smooth={true}
               duration={500}
               className="cursor-pointer bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 font-montserrat leading-normal text-lg"
-              onClick={() => setOpen(false)} // Close the dropdown when a link is clicked
+              onClick={() => setOpen(false)}
             >
               Contact Us
             </ScrollLink>
@@ -88,7 +87,7 @@ const Nav = () => {
                 <RouterLink
                   to="/signup"
                   className="bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 font-montserrat leading-normal text-lg"
-                  onClick={() => setOpen(false)} // Close the dropdown when a link is clicked
+                  onClick={() => setOpen(false)}
                 >
                   Signup
                 </RouterLink>
@@ -97,15 +96,26 @@ const Nav = () => {
           )}
 
           {isLoggedIn && (
-            <li className="relative" onClick={logout}>
-              <RouterLink
-                to="#"
-                className="bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 font-montserrat leading-normal text-lg"
-                onClick={logout} // Close the dropdown when a link is clicked
-              >
-                Logout
-              </RouterLink>
-            </li>
+            <>
+              <li className="relative">
+                <RouterLink
+                  to="/mytickets"
+                  className="bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 font-montserrat leading-normal text-lg"
+                  onClick={() => setOpen(false)}
+                >
+                  My Tickets
+                </RouterLink>
+              </li>
+              <li className="relative" onClick={logout}>
+                <RouterLink
+                  to="#"
+                  className="bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 font-montserrat leading-normal text-lg"
+                  onClick={logout}
+                >
+                  Logout
+                </RouterLink>
+              </li>
+            </>
           )}
         </ul>
         <div className="hidden max-lg:block">
@@ -120,6 +130,129 @@ const Nav = () => {
 };
 
 export default Nav;
+
+// import React, { useState } from 'react';
+// import { Link as RouterLink } from 'react-router-dom';
+// import { Link as ScrollLink, animateScroll as scroll } from 'react-scroll';
+// import LoginDropdown from '../components/LoginDropdown';
+// import { navLinks } from '../constants';
+// import { hamburger } from '../assets/icons';
+// import Dropdown from '../sections/dropdown';
+// import { headerLogo } from '../assets/images'; // Import the headerLogo image
+// import { dropdownlist } from '../constants';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { authActions } from '../store';
+
+// const Nav = () => {
+//   const dispatch = useDispatch();
+//   const isLoggedIn = useSelector((state) => state.isLoggedIn);
+//   const [isOpen, setOpen] = useState(false);
+//   const [isLoginOpen, setLoginOpen] = useState(false);
+
+//   const logout = () => {
+//     sessionStorage.clear('id');
+//     dispatch(authActions.logout());
+    
+//   };
+
+//   return (
+//     <header className="padding-x py-5 absolute z-10 w-full">
+//       <nav className="flex justify-between items-center max-container">
+//         <RouterLink to="/">
+//           <img src={headerLogo} alt="Logo" width={180} height={60} /> {/* Include the header logo */}
+//         </RouterLink>
+//         <ul className="flex-1 flex justify-center items-center gap-16 max-lg:hidden relative">
+//           <li className="relative">
+//             <RouterLink
+//               to="/"
+//               className="bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 font-montserrat leading-normal text-lg"
+//               onClick={() => setOpen(false)} // Close the dropdown when a link is clicked
+//             >
+//               Home
+//             </RouterLink>
+//           </li>
+//           <li className="relative">
+//             <ScrollLink
+//               to="about-us"
+//               smooth={true}
+//               duration={500}
+//               className="cursor-pointer bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 font-montserrat leading-normal text-lg"
+//               onClick={() => setOpen(false)} // Close the dropdown when a link is clicked
+//             >
+//               About Us
+//             </ScrollLink>
+//           </li>
+//           <li className="relative">
+//             <RouterLink
+//               to="/ticket"
+//               className="bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 font-montserrat leading-normal text-lg"
+//               onClick={() => setOpen(false)} // Close the dropdown when a link is clicked
+//             >
+//               Help Ticket
+//             </RouterLink>
+//           </li>
+//           <li className="relative">
+//             <ScrollLink
+//               to="contact-us"
+//               smooth={true}
+//               duration={500}
+//               className="cursor-pointer bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 font-montserrat leading-normal text-lg"
+//               onClick={() => setOpen(false)} // Close the dropdown when a link is clicked
+//             >
+//               Contact Us
+//             </ScrollLink>
+//           </li>
+
+//           {!isLoggedIn && (
+//             <>
+//               <li className="relative">
+//                 <div className="relative">
+//                   <button
+//                     onClick={() => setLoginOpen((prev) => !prev)}
+//                     className="bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 font-montserrat leading-normal text-lg"
+//                   >
+//                     {dropdownlist.label}
+//                   </button>
+//                   {isLoginOpen && <LoginDropdown dropdownLinks={dropdownlist.dropdown} />}
+//                 </div>
+//               </li>
+
+//               <li className="relative">
+//                 <RouterLink
+//                   to="/signup"
+//                   className="bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 font-montserrat leading-normal text-lg"
+//                   onClick={() => setOpen(false)} // Close the dropdown when a link is clicked
+//                 >
+//                   Signup
+//                 </RouterLink>
+//               </li>
+//             </>
+//           )}
+
+//           {isLoggedIn && (
+//             <li className="relative" onClick={logout}>
+//               <RouterLink
+//                 to="#"
+//                 className="bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 font-montserrat leading-normal text-lg"
+//                 onClick={logout} // Close the dropdown when a link is clicked
+//               >
+//                 Logout
+//               </RouterLink>
+//             </li>
+//           )}
+//         </ul>
+//         <div className="hidden max-lg:block">
+//           <button onClick={() => setOpen((prev) => !prev)}>
+//             {!isOpen && <img src={hamburger} alt="Hamburger" width={25} height={25} />}
+//             {isOpen && <Dropdown />}
+//           </button>
+//         </div>
+//       </nav>
+//     </header>
+//   );
+// };
+
+// export default Nav;
 
 // import React, { useState } from 'react';
 // import { Link, useLocation } from 'react-router-dom';
