@@ -72,29 +72,29 @@ const AdminLogin = () => {
   const isadmin = useSelector((state) => state.isAdminLoggedIn)
   const [tickets, setTickets] = useState([]);
   const [completedTickets, setCompletedTickets] = useState([]);
+  const fetchTickets = async () => {
+    try {
+      const response = await axios.get('http://localhost:1000/api/allList/pendingtickets');
+      setTickets(response.data.ticketslist);
+    } catch (error) {
+      console.error('Error fetching tickets:', error);
+    }
+  };
 
   useEffect(() => {
-    const fetchTickets = async () => {
-      try {
-        const response = await axios.get('http://localhost:1000/api/allList/pendingtickets');
-        setTickets(response.data.ticketslist);
-      } catch (error) {
-        console.error('Error fetching tickets:', error);
-      }
-    };
 
     fetchTickets();
   }, []);
-
+  const fetchCompletedTickets = async () => {
+    try {
+      const response = await axios.get('http://localhost:1000/api/allList/completedtickets');
+      setCompletedTickets(response.data.completedTickets);
+    } catch (error) {
+      console.error('Error fetching completed tickets:', error);
+    }
+  };
   useEffect(() => {
-    const fetchCompletedTickets = async () => {
-      try {
-        const response = await axios.get('http://localhost:1000/api/allList/completedtickets');
-        setCompletedTickets(response.data.completedTickets);
-      } catch (error) {
-        console.error('Error fetching completed tickets:', error);
-      }
-    };
+
 
     fetchCompletedTickets();
   }, []);
@@ -151,7 +151,10 @@ const AdminLogin = () => {
     })
     .then(response => {
         console.log('Assignment successful:', response.data.message);
-        setModalVisible(false); // Close modal or handle UI state accordingly
+        setModalVisible(false);
+        fetchCompletedTickets();
+        fetchTickets();
+         // Close modal or handle UI state accordingly
     })
     .catch(error => {
         console.error('Error during assignment:', error);
@@ -371,14 +374,14 @@ const AdminLogin = () => {
                 </p>
               ) : null}
             </div>
-            <Button
+            {/* <Button
               type="primary"
               className="mt-2"
               style={buttonStyle}
               onClick={() => handleAssignTicket(completedIssue)}
             >
               view photo
-            </Button>
+            </Button> */}
           </Card>
         ))}
 
