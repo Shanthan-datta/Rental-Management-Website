@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, Typography, Button, Modal, Select, ConfigProvider } from 'antd';
-import { products} from '../constants';
+
 import PopularProductCard from '../components/PopularProductCard';
 import axios from 'axios';
 import { TinyColor } from '@ctrl/tinycolor';
@@ -80,7 +80,19 @@ const AdminLogin = () => {
       console.error('Error fetching tickets:', error);
     }
   };
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get('http://localhost:1000/api/v5/allbuildings');
+        setProducts(response.data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
 
+    fetchProducts();
+  }, []);
   useEffect(() => {
 
     fetchTickets();
@@ -135,11 +147,14 @@ const AdminLogin = () => {
   };
 
   const handleStaffSelect = async (staffid) => {
+    console.log("gmm")
+    setassignstaff(null)
+    setSelectedStaff(null);
     const response = await axios.post('http://localhost:1000/api/v3/staff', { staffId: staffid });
     setassignstaff(response.data)
     setSelectedStaff(response.data.fullName);
     setDropdownVisible(false);
-    setModalVisible(true);
+    setModalVisible(true); //makes the assigning confirm 
   };
 
   const handleModalOk = () => {
@@ -219,7 +234,7 @@ const AdminLogin = () => {
         </div>
         <div className="flex mt-16 flex-row flex-shrink-0 gap-4 py-2 overflow-x-auto scrollbar-webkit scrollbar-thin">
           {products.map((product) => (
-            <PopularProductCard key={product.name} {...product} />
+            <PopularProductCard key={product.buildingname} {...product} />
           ))}
         </div>
       </section>
@@ -407,21 +422,28 @@ const AdminLogin = () => {
         footer={null}
       >
         <Select
-          showSearch
-          style={{ width: '100%' }}
-          placeholder="Select a staff member"
-          optionFilterProp="children"
-          onChange={handleStaffSelect}
-          filterOption={(input, option) =>
-            option.children.toLowerCase().includes(input.toLowerCase())
-          }
-        >
-          {staffMembers.map((staff) => (
-            <Option key={staff._id} value={staff.staffId}>
-              {staff.fullName} - {staff.work}
-            </Option>
-          ))}
-        </Select>
+  showSearch
+  style={{ width: '100%' }}
+  placeholder="Select a staff member"
+  optionFilterProp="children"
+  onChange={handleStaffSelect}
+  onDropdownVisibleChange={(open) => {
+    if (!open) {
+      setDropdownVisible(false);
+      setModalVisible(true);
+    }
+  }}
+  filterOption={(input, option) =>
+    typeof option.children === 'object' &&
+    option.children.join('').toLowerCase().includes(input.toLowerCase())
+  }
+>
+  {staffMembers.map((staff) => (
+    <Option key={staff._id} value={staff.staffId}>
+      {staff.fullName} - {staff.work}
+    </Option>
+  ))}
+</Select>
       </Modal>
     </div>
     </>}

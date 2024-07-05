@@ -76,7 +76,7 @@ const StaffEnroll = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700">Type of Work</label>
+          <label className="block text-gray-700">Designation</label>
           <input
             type="text"
             name='work'

@@ -1,21 +1,45 @@
 import React, { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 const NewBuilding = () => {
-  const [buildingName, setBuildingName] = useState('');
-  const [rent, setRent] = useState('');
-  const [address, setAddress] = useState('');
-  const [picture, setPicture] = useState(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [photo, setphoto] = useState("")
+  const handlephoto = (e) =>{
+    setphoto(e.target.files[0]);
+  }
+  const [form, setForm] = useState({
+      buildingname: '',
+      rent: '',
+      address:'',
+  });
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+      const { name, value } = e.target;
+      setForm({
+          ...form,
+          [name]: value
+      });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic
-    console.log({ buildingName, rent, address, picture });
+    const formData = new FormData();
+    formData.append("picture",photo)
+    formData.append("form",JSON.stringify(form))
+    console.log(form)
+    let response = await fetch("http://localhost:1000/api/v5/addbuilding",{
+      method:"POST",
+      credentials:'include', 
+      body:formData
+    })
   };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <form
         onSubmit={handleSubmit}
+        enctype="multipart/form-data"
         className="bg-white p-8 rounded shadow-md w-full max-w-md"
       >
         <h2 className="text-2xl mb-6">Add New Building</h2>
@@ -23,8 +47,9 @@ const NewBuilding = () => {
           <label className="block text-gray-700">Building Name</label>
           <input
             type="text"
-            value={buildingName}
-            onChange={(e) => setBuildingName(e.target.value)}
+            name='buildingname'
+            value={form.buildingname}
+            onChange={handleChange}
             className="mt-1 p-2 border border-gray-300 rounded w-full"
           />
         </div>
@@ -32,8 +57,9 @@ const NewBuilding = () => {
           <label className="block text-gray-700">Rent</label>
           <input
             type="number"
-            value={rent}
-            onChange={(e) => setRent(e.target.value)}
+            name='rent'
+            value={form.rent}
+            onChange={handleChange}
             className="mt-1 p-2 border border-gray-300 rounded w-full"
           />
         </div>
@@ -41,8 +67,9 @@ const NewBuilding = () => {
           <label className="block text-gray-700">Address</label>
           <input
             type="text"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
+            name='address'
+            value={form.address}
+            onChange={handleChange}
             className="mt-1 p-2 border border-gray-300 rounded w-full"
           />
         </div>
@@ -50,7 +77,7 @@ const NewBuilding = () => {
           <label className="block text-gray-700">Picture</label>
           <input
             type="file"
-            onChange={(e) => setPicture(e.target.files[0])}
+            onChange={handlephoto}
             className="mt-1 p-2 border border-gray-300 rounded w-full"
           />
         </div>
