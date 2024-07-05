@@ -122,7 +122,11 @@ export const issues = [
         street: "Second Street",
         city: "Hyderabad",
         postalCode: "500002",
-        issue: "Electrical failure in the living room"
+        issue: "Electrical failure in the living room",
+        status:"pending",
+        StaffName:"john",
+        StaffNumber:"8008283902"
+        
     },
     {
         name: "Jane Smith",
@@ -133,7 +137,10 @@ export const issues = [
         street: "Second Street",
         city: "Hyderabad",
         postalCode: "500002",
-        issue: "Electrical failure in the living room"
+        issue: "Electrical failure in the living room",
+        status:"assigned",
+        StaffName:"suresh",
+        StaffNumber:"8008283903"
     },
     {
         name: "Jane Smith",
@@ -144,7 +151,10 @@ export const issues = [
         street: "Qaitallapur near idl lake",
         city: "Hyderabad",
         postalCode: "500002",
-        issue: "Electrical failure in the living room"
+        issue: "Electrical failure in the living room",
+        StaffName:"ramesh",
+        StaffNumber:"8008283905"
+        
     },
     
   ];

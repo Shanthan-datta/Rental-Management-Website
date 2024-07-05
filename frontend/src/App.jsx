@@ -15,6 +15,9 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { authActions } from './store';
 import StaffEnroll from './components/StaffEnroll';
+import MyTickets from './components/MyTickets'; 
+
+
 
 const App = () => {
   const dispatch = useDispatch()
@@ -46,6 +49,7 @@ const App = () => {
         <Route path="/Newbuilding" element={<Newbuilding />} />
         <Route path="/StaffEnroll" element={<StaffEnroll />} />
         <Route path="/ViewPhoto" element={<ViewPhoto />} />
+        <Route path="/MyTickets" element={<MyTickets/>} />
          {/* Update the route path */}
       </Routes>
       </BrowserRouter>

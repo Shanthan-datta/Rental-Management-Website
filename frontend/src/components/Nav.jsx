@@ -105,7 +105,7 @@ const Nav = () => {
             
               <li className="relative">
                 <RouterLink
-                  to="/mytickets"
+                  to="/MyTickets"
                   className="bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 font-montserrat leading-normal text-lg"
                   onClick={() => setOpen(false)}
                 >
