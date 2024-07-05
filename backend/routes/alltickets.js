@@ -58,11 +58,11 @@ router.get("/completedtickets", async (req, res) => {
     }
 });
 router.post("/assign", async (req, res) => {
-    const { staffId, ticketId } = req.body;
+    const { id, ticketId } = req.body;
 
     try {
         // Find staff by ID
-        const staff = await Staff.findById(staffId);
+        const staff = await Staff.findById(id);
         if (!staff) {
             return res.status(404).json({ error: "Staff not found" });
         }
@@ -77,16 +77,38 @@ router.post("/assign", async (req, res) => {
         staff.TicketsList.push(ticketId);
         await staff.save();
 
-        // Update ticket status to "assigned"
-        ticket.status = "assigned";
-        ticket.assigned = staffId
-        await ticket.save();
-
         // Send success response
         res.status(200).json({ message: "Assignment successful",});
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Internal server error" });
+    }
+});
+router.get("/mytickets", async (req, res) => {
+    try {
+        const { id } = req.query; // Retrieve staffId from query parameters
+        // Basic validation
+        if (!id) {
+            return res.status(400).json({ message: "Staff ID is required in the query parameters" });
+        }
+
+        // Find staff member by id
+        const existinguser = await User.findById(id);
+        if (!existinguser) {
+            return res.status(404).json({ message: "Staff member not found" });
+        }
+
+        // Retrieve tickets associated with the staff member
+        const ticketIds = existinguser.TicketsList; // Assuming ticketList contains ticket IDs
+
+        // Fetch tickets from the database based on ticket IDs
+        const ticketss = await AllTickets.find({ _id: { $in: ticketIds } });
+
+        // Return the list of tickets associated with the staff member
+        res.status(200).json({ ticketss });
+    } catch (error) {
+        console.error("Error fetching tickets for staff member:", error);
+        res.status(500).json({ message: "Internal server error" });
     }
 });
 

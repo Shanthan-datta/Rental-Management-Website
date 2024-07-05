@@ -19,7 +19,7 @@ router.post("/addbuilding", async (req, res) => {
                 newbuilding.picture.data = fs.readFileSync(files.picture.filepath)
                 newbuilding.picture.contentType = files.picture.mimetype
                 await newbuilding.save()
-                return response.status(200).json({})
+                return res.status(200).json({})
             }
         )
     } catch (error) {

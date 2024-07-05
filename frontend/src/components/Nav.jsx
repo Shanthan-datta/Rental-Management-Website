@@ -13,12 +13,18 @@ import { authActions } from '../store';
 const Nav = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const isAdminLoggedIn = useSelector((state) => state.isAdminLoggedIn);
+  const isStaffLoggedIn = useSelector((state) => state.isStaffLoggedIn);
   const [isOpen, setOpen] = useState(false);
   const [isLoginOpen, setLoginOpen] = useState(false);
 
   const logout = () => {
     localStorage.clear('id');
+    localStorage.clear('adminLoginId');
+    localStorage.clear('staffLoginId');
     dispatch(authActions.logout());
+    dispatch(authActions.staffLogout());
+    dispatch(authActions.adminLogout());
   };
 
   return (
@@ -69,7 +75,7 @@ const Nav = () => {
             </ScrollLink>
           </li>
 
-          {!isLoggedIn && (
+          {!(isLoggedIn || isAdminLoggedIn || isStaffLoggedIn) && (
             <>
               <li className="relative">
                 <div className="relative">
@@ -96,7 +102,7 @@ const Nav = () => {
           )}
 
           {isLoggedIn && (
-            <>
+            
               <li className="relative">
                 <RouterLink
                   to="/mytickets"
@@ -105,8 +111,8 @@ const Nav = () => {
                 >
                   My Tickets
                 </RouterLink>
-              </li>
-              <li className="relative" onClick={logout}>
+              </li>)}
+              {(isLoggedIn || isAdminLoggedIn || isStaffLoggedIn)&& (<li className="relative" onClick={logout}>
                 <RouterLink
                   to="#"
                   className="bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 font-montserrat leading-normal text-lg"
@@ -114,9 +120,9 @@ const Nav = () => {
                 >
                   Logout
                 </RouterLink>
-              </li>
-            </>
-          )}
+              </li>)}
+          
+          
         </ul>
         <div className="hidden max-lg:block">
           <button onClick={() => setOpen((prev) => !prev)}>
