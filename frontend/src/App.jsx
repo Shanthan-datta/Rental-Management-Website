@@ -9,6 +9,7 @@ import StaffLogin from './components/StaffLogin';
 import AdminLoginPage from './components/AdminLoginPage'; 
 import AdminLogin from './components/AdminLogin'; 
 import Newbuilding from './components/Newbuilding'; 
+import ViewPhoto from './components/ViewPhoto'; 
 import { BrowserRouter } from 'react-router-dom'
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -44,6 +45,7 @@ const App = () => {
         <Route path="/Admin" element={<AdminLogin />} />
         <Route path="/Newbuilding" element={<Newbuilding />} />
         <Route path="/StaffEnroll" element={<StaffEnroll />} />
+        <Route path="/ViewPhoto" element={<ViewPhoto />} />
          {/* Update the route path */}
       </Routes>
       </BrowserRouter>

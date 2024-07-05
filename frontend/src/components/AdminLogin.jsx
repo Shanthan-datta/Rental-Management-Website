@@ -140,6 +140,8 @@ const AdminLogin = () => {
   const handleEnrollClick = () => {
     navigate('/StaffEnroll');
   };
+  
+ 
 
   const handleAssignTicket = (issue) => {
     setSelectedIssue(issue);
@@ -188,6 +190,8 @@ const AdminLogin = () => {
 
   const handleViewPhoto = (ticket) => {
     console.log(`Viewing photo for ticket: ${ticket.buildingName}`);
+    navigate('/ViewPhoto');
+
     // Logic to view photo should be implemented here
     // Placeholder for now
   };
