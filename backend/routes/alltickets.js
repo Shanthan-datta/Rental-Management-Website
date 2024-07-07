@@ -2,6 +2,7 @@ const router = require("express").Router();
 const User = require("../models/users");
 const AllTickets = require("../models/allticketsschema");
 const Staff = require("../models/staff")
+const toAdmin = require("../routes/mailers/toadmin")
 // creates new ticket
 router.post("/addTickets", async (req, res) => {
     try {
@@ -24,6 +25,7 @@ router.post("/addTickets", async (req, res) => {
                 status:"pending",
                 users:existingUser,
             });
+            toAdmin("kvishnuprasanth2@gmail.com")
 
             await newTicket.save();
             existingUser.TicketsList.push(newTicket);
