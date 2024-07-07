@@ -59,10 +59,11 @@ router.get("/completedtickets", async (req, res) => {
 });
 router.post("/assign", async (req, res) => {
     const { id, ticketId } = req.body;
-
+    
     try {
         // Find staff by ID
-        const staff = await Staff.findById(id);
+        const staff = await Staff.findById(req.body.staffId);
+
         if (!staff) {
             return res.status(404).json({ error: "Staff not found" });
         }
@@ -72,8 +73,13 @@ router.post("/assign", async (req, res) => {
         if (!ticket) {
             return res.status(404).json({ error: "Ticket not found" });
         }
+        console.log(ticket)
 
-        // Update staff's ticketsList with ticketId
+        ticket.status = "assigned"
+        ticket.staffName = staff.fullName
+        ticket.staffNumber = staff.contactNo
+
+        await ticket.save();
         staff.TicketsList.push(ticketId);
         await staff.save();
 
@@ -84,15 +90,15 @@ router.post("/assign", async (req, res) => {
         res.status(500).json({ error: "Internal server error" });
     }
 });
+
 router.get("/mytickets", async (req, res) => {
+    const { id } = req.query
     try {
-        const { id } = req.query; // Retrieve staffId from query parameters
-        // Basic validation
         if (!id) {
-            return res.status(400).json({ message: "Staff ID is required in the query parameters" });
+            return res.status(400).json({ message: "user ID is required in the query parameters" });
         }
 
-        // Find staff member by id
+        
         const existinguser = await User.findById(id);
         if (!existinguser) {
             return res.status(404).json({ message: "Staff member not found" });
@@ -102,15 +108,14 @@ router.get("/mytickets", async (req, res) => {
         const ticketIds = existinguser.TicketsList; // Assuming ticketList contains ticket IDs
 
         // Fetch tickets from the database based on ticket IDs
-        const ticketss = await AllTickets.find({ _id: { $in: ticketIds } });
+        const tickets = await AllTickets.find({ _id: { $in: ticketIds } });
 
         // Return the list of tickets associated with the staff member
-        res.status(200).json({ ticketss });
+        res.status(200).json({ tickets });
     } catch (error) {
         console.error("Error fetching tickets for staff member:", error);
         res.status(500).json({ message: "Internal server error" });
     }
 });
-
 
 module.exports = router;

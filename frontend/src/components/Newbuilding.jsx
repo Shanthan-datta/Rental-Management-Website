@@ -51,7 +51,6 @@ const NewBuilding = () => {
         // credentials: 'include',
         body: formData
       });
-      console.log(response)
       if (response.ok) {
         toast.success('Building added successfully!');
         // Clear the form after successful submission
@@ -114,6 +113,7 @@ const NewBuilding = () => {
           <input
             type="file"
             onChange={handlePhotoChange}
+            onClick={handlePhotoChange}
             className="mt-1 p-2 border border-gray-300 rounded w-full"
           />
         </div>

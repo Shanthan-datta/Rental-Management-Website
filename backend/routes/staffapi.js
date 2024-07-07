@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const staff = require("../models/staff");
 const tickets = require("../models/allticketsschema");
+const formidable = require("formidable")
+const fs = require("fs")
 
 router.post("/staffregister", async (req, res) => {
     try {
@@ -122,40 +124,49 @@ router.get("/staff/tickets", async (req, res) => {
 });
 router.post("/issue/completed", async (req, res) => {
     try {
-        const { staffId, ticketId } = req.body;
+        const form = formidable({});
+        form.parse(req,
+            async (error,fields,files)=>{
+                const formdata = JSON.parse(fields.form)
+                const ticketId = formdata.ticketId
+                const staffId = formdata.staffId
+                const ticket = await tickets.findByIdAndUpdate(ticketId, { status: "completed" });
+                const staffMember = await staff.findById(staffId);
+                const index = staffMember.TicketsList.indexOf(ticketId);
+                staffMember.TicketsList.splice(index, 1);
+                await staffMember.save();
+                ticket.picture.data = fs.readFileSync(files.picture.filepath)
+                ticket.picture.contentType = files.picture.mimetype
+                await ticket.save()
+                return res.status(200).json({ message: "Ticket removed and status updated successfully"});
+            }
+        )
+
+
+       
 
         // Basic validation
-        if (!staffId || !ticketId) {
-            return res.status(400).json({ message: "Staff ID and Ticket ID are required" });
-        }
 
-        // Find staff member by staffId
-        const staffMember = await staff.findById(staffId);
-        if (!staffMember) {
-            return res.status(404).json({ message: "Staff member not found" });
-        }
 
-        // Check if ticketId exists in staffMember's ticket list
-        const index = staffMember.TicketsList.indexOf(ticketId);
-        if (index === -1) {
-            return res.status(404).json({ message: "Ticket not found in staff member's list" });
-        }
-
-        // Remove ticketId from staffMember's ticket list
-        staffMember.TicketsList.splice(index, 1);
-
-        // Save updated staff member
-        await staffMember.save();
-
-        // Update ticket status to completed
-        const ticket = await tickets.findByIdAndUpdate(ticketId, { status: "completed" });
+        // Find staff member by staf
 
         // Return success message
-        res.status(200).json({ message: "Ticket removed and status updated successfully"});
+        
     } catch (error) {
         console.error("Error removing ticket from staff member:", error);
         res.status(500).json({ message: "Internal server error" });
     }
 });
-
+router.get("/taskpicture", async (req,res)=>{
+    try {
+        let ticket = await tickets.findById(req.query.id).select('picture');
+        if(ticket.picture.data){
+            res.set('Content-type',ticket.picture.contentType)
+            return res.status(200).send(ticket.picture.data)
+        }
+        
+    } catch (error) {
+        console.log(error);
+    }
+})
 module.exports = router;

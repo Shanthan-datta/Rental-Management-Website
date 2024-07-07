@@ -27,7 +27,7 @@ const Staff = new mongoose.Schema({
     
     TicketsList:[{
         type: mongoose.Types.ObjectId,
-        ref: "ticketsList" ,
+        ref: "allTicketsList" ,
     }]
 })
 module.exports = mongoose.model("staff", Staff)

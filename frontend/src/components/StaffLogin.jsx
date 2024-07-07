@@ -59,6 +59,7 @@ const textStyle = {
 
 const StaffLogin = () => {
   const [mytickets, setMyTickets] = useState([]);
+  const [photo, setPhoto] = useState(null);
   const [selectedImages, setSelectedImages] = useState(Array(mytickets.length).fill(null));
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedIssue, setSelectedIssue] = useState(null);
@@ -91,13 +92,28 @@ const StaffLogin = () => {
       const newImages = [...selectedImages];
       newImages[index] = URL.createObjectURL(file);
       setSelectedImages(newImages);
+      setPhoto(file)
     }
+  };
+  const handlePhotoChange = (e) => {
+    setPhoto(e.target.files[0]);
   };
 
   const handleCloseTicket = async (index) => {
+    const ticketId = mytickets[index]._id;
+    const formData = new FormData();
+    formData.append('picture', photo);
+    formData.append('form', JSON.stringify({ staffId, ticketId }));
     try {
-      const ticketId = mytickets[index]._id; // Assuming your ticket object has an _id field
-      await axios.post(`http://localhost:1000/api/v3/issue/completed`, { staffId, ticketId });
+
+      await fetch(`http://localhost:1000/api/v3/issue/completed`, {
+        method: 'POST',
+        headers:{
+          'Access-Control-Allow-Origin': '*',
+        },
+        // credentials: 'include',
+        body: formData
+      });// Assuming your ticket object has an _id field
       fetchStaffTickets(); // Refresh the ticket list after closing a ticket
     } catch (error) {
       console.error('Error closing ticket:', error);

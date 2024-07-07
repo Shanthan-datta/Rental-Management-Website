@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const { request } = require("express");
 const fs = require("fs")
 const Building = require("../models/building")
 const formidable = require("formidable")
@@ -9,7 +8,6 @@ router.post("/addbuilding", async (req, res) => {
         form.parse(req,
             async (error,fields,files)=>{
                 const formdata = JSON.parse(fields.form)
-                console.log(formdata)
                 const newbuilding = await Building.create({
                     buildingname: formdata.buildingname,
                     rent: formdata.rent,

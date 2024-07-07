@@ -41,9 +41,17 @@ const allTicketsList = new mongoose.Schema({
         type: String,
         required: false, // Optional field
     },
-    assigned:{
+    staffName:{
         type: String,
         required: false, // Optional field
+    },
+    staffNumber:{
+        type: String,
+        required: false, // Optional field
+    },
+    picture:{
+        data: Buffer,
+        contentType: String,
     },
     users:[{
         type: mongoose.Types.ObjectId,

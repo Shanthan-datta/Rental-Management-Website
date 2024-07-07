@@ -27,18 +27,22 @@ const textStyle = {
 };
 
 const MyTickets = () => {
+  const id = localStorage.getItem("id")
   const [tickets, setTickets] = useState([]);
   const [expandedIssue, setExpandedIssue] = useState(null);
 
+  const fetchTickets = async () => {
+    try {
+      const response = await axios.get('http://localhost:1000/api/allList/mytickets',  {
+        params: { id },
+      } );
+      setTickets(response.data.tickets);
+    } catch (error) {
+      console.error('Error fetching tickets:', error);
+    }
+  };
+
   useEffect(() => {
-    const fetchTickets = async () => {
-      try {
-        const response = await axios.get('http://localhost:1000/api/allList/pendingtickets');
-        setTickets(response.data.ticketslist);
-      } catch (error) {
-        console.error('Error fetching tickets:', error);
-      }
-    };
 
     fetchTickets();
   }, []);
@@ -88,12 +92,12 @@ const MyTickets = () => {
               </p>
               {issue.staffName && (
                 <p style={textStyle}>
-                  <strong>Staff Name:</strong> {issue.StaffName}
+                  <strong>Staff Name:</strong> {issue.staffName}
                 </p>
               )}
               {issue.staffNumber && (
                 <p style={textStyle}>
-                  <strong>Staff Number:</strong> {issue.StaffNumber}
+                  <strong>Staff Number:</strong> {issue.staffNumber}
                 </p>
               )}
               {issue.street || issue.city || issue.postalCode ? (
