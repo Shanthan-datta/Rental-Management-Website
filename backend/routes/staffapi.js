@@ -157,16 +157,5 @@ router.post("/issue/completed", async (req, res) => {
         res.status(500).json({ message: "Internal server error" });
     }
 });
-router.get("/taskpicture", async (req,res)=>{
-    try {
-        let ticket = await tickets.findById(req.query.id).select('picture');
-        if(ticket.picture.data){
-            res.set('Content-type',ticket.picture.contentType)
-            return res.status(200).send(ticket.picture.data)
-        }
-        
-    } catch (error) {
-        console.log(error);
-    }
-})
+
 module.exports = router;

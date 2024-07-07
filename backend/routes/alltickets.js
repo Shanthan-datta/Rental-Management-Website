@@ -2,7 +2,8 @@ const router = require("express").Router();
 const User = require("../models/users");
 const AllTickets = require("../models/allticketsschema");
 const Staff = require("../models/staff")
-const { toadmin } = require("../routes/mailers/toadmin")
+const { toadmin } = require("../routes/mailers/toadmin");
+const allticketsschema = require("../models/allticketsschema");
 // creates new ticket
 router.post("/addTickets", async (req, res) => {
     try {
@@ -119,5 +120,16 @@ router.get("/mytickets", async (req, res) => {
         res.status(500).json({ message: "Internal server error" });
     }
 });
-
+router.get("/taskpicture", async (req,res)=>{
+    try {
+        let ticket = await AllTickets.findById(req.query.id).select('picture');
+        if(ticket.picture.data){
+            res.set('Content-type',ticket.picture.contentType)
+            return res.status(200).send(ticket.picture.data)
+        }
+        
+    } catch (error) {
+        console.log(error);
+    }
+})
 module.exports = router;

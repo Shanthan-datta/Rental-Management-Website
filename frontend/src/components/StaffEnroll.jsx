@@ -11,7 +11,7 @@ const StaffEnroll = () => {
     email: '',
     contactNo: '',
   });
-
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm({

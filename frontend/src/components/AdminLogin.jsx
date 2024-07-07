@@ -69,7 +69,9 @@ const getActiveColors = (colors) =>
   colors.map((color) => new TinyColor(color).darken(5).toString());
 
 const AdminLogin = () => {
+  const [photoUrl, setPhotoUrl] = useState('');
   const isadmin = useSelector((state) => state.isAdminLoggedIn)
+  const [viewPhotoModalVisible, setViewPhotoModalVisible] = useState(false);
   const [tickets, setTickets] = useState([]);
   const [completedTickets, setCompletedTickets] = useState([]);
   const fetchTickets = async () => {
@@ -121,6 +123,7 @@ const AdminLogin = () => {
   const [staffMembers, setstaffmembers] = useState([]);
   const [assignstaff , setassignstaff] = useState(null)
 
+
   useEffect(() => {
     const fetchStaffMembers = async () => {
       try {
@@ -149,7 +152,6 @@ const AdminLogin = () => {
   };
 
   const handleStaffSelect = async (staffid) => {
-    console.log("gmm")
     setassignstaff(null)
     setSelectedStaff(null);
     const response = await axios.post('http://localhost:1000/api/v3/staff', { staffId: staffid });
@@ -180,20 +182,17 @@ const AdminLogin = () => {
     setModalVisible(false);
   };
 
-  const handleModalCancel = () => {
-    setModalVisible(false);
-  };
-
   const handleExpandAddress = (index) => {
     setExpandedIssue(expandedIssue === index ? null : index);
   };
-
   const handleViewPhoto = (ticket) => {
-    console.log(`Viewing photo for ticket: ${ticket.buildingName}`);
-    navigate('/ViewPhoto');
+    console.log(ticket)
+    setPhotoUrl(ticket._id); // Assuming imageUrl is a property of the ticket object
+    setViewPhotoModalVisible(true);
+  };
 
-    // Logic to view photo should be implemented here
-    // Placeholder for now
+  const handleModalCancel = () => {
+    setViewPhotoModalVisible(false);
   };
 
   return (
@@ -393,17 +392,16 @@ const AdminLogin = () => {
                 </p>
               ) : null}
             </div>
-            {/* <Button
+            <Button
               type="primary"
               className="mt-2"
               style={buttonStyle}
-              onClick={() => handleAssignTicket(completedIssue)}
+              onClick={() => handleViewPhoto(completedIssue)}
             >
               view photo
-            </Button> */}
+            </Button>
           </Card>
         ))}
-
         
       </div>
 
@@ -449,6 +447,14 @@ const AdminLogin = () => {
   ))}
 </Select>
       </Modal>
+      <Modal
+              title="View Photo"
+              visible={viewPhotoModalVisible}
+              onCancel={handleModalCancel}
+              footer={null}
+            >
+              <img src={`http://localhost:1000/api/allList/taskpicture?id=${photoUrl}`} alt="Ticket Photo" style={{ maxWidth: '100%', height: 'auto' }} />
+            </Modal>
     </div>
     </>}
     </div>
