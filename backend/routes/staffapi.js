@@ -73,15 +73,13 @@ router.get("/stafflist", async (req, res) => {
 });
 router.post("/staff", async (req, res) => {
     try {
-        const { staffId } = req.body;
-
         // Basic validation
-        if (!staffId) {
+        if (!(req.body.staffId)) {
             return res.status(400).json({ message: "Staff ID is required" });
         }
 
         // Find staff member by staffId
-        const staffMember = await staff.findOne({ staffId });
+        const staffMember = await staff.findById(req.body.staffId);
 
         // Check if staff member exists
         if (!staffMember) {
