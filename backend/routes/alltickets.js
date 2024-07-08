@@ -26,7 +26,7 @@ router.post("/addTickets", async (req, res) => {
                 status:"pending",
                 users:existingUser,
             });
-            toadmin("vs.datta2003@gmail.com")
+            toadmin("kvishnuprasanth2@gmail.com")
 
             await newTicket.save();
             existingUser.TicketsList.push(newTicket);
