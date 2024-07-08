@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { authActions } from '../store';
 import { useDispatch } from 'react-redux';
+import PopularProductCard from './PopularProductCard';
 
 const { Option } = Select;
 
@@ -63,6 +64,7 @@ const AdminLogin = () => {
   const [staffMembers, setStaffMembers] = useState([]);
   const [assignStaff, setAssignStaff] = useState(null);
   const [viewPhotoModalVisible, setViewPhotoModalVisible] = useState(false);
+  const [products, setProducts] = useState([])
   const [photoUrl, setPhotoUrl] = useState('');
   const dispatch = useDispatch();
 
@@ -164,7 +166,18 @@ const AdminLogin = () => {
         dispatch(authActions.adminLogout());
         navigate('/');
       };
+      useEffect(() => {
+        const fetchProducts = async () => {
+          try {
+            const response = await axios.get('http://localhost:1000/api/v5/allbuildings');
+            setProducts(response.data);
+          } catch (error) {
+            console.error('Error fetching products:', error);
+          }
+        };
     
+        fetchProducts();
+      }, []);
 
   return (
     <div>
@@ -218,7 +231,24 @@ const AdminLogin = () => {
                 </div>
               </div>
               <div className="flex mt-16 flex-row flex-shrink-0 gap-4 py-2 overflow-x-auto scrollbar-webkit scrollbar-thin">
-                {/* Render products */}
+              <div>
+      <section id="products"
+       className="max-container max-sm:mt-12
+       ">
+        <div className="flex w-120 flex-row  flex-shrink-0 gap-4 py-1 overflow-x-auto 
+        scrollbar-webkit scrollbar-thin
+          ">
+          {products.map((product)=>(
+            <PopularProductCard key={product.name}
+            {...product}/>
+          ))}
+
+
+        </div>
+
+      </section>
+
+    </div>
               </div>
             </section>
 
