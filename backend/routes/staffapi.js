@@ -3,7 +3,7 @@ const staff = require("../models/staff");
 const tickets = require("../models/allticketsschema");
 const formidable = require("formidable")
 const fs = require("fs")
-
+const { toadmin } = require("../routes/mailers/toadmin");
 router.post("/staffregister", async (req, res) => {
     try {
         const { fullName, staffId, work, email, contactNo } = req.body;
@@ -133,6 +133,7 @@ router.post("/issue/completed", async (req, res) => {
                 const index = staffMember.TicketsList.indexOf(ticketId);
                 staffMember.TicketsList.splice(index, 1);
                 await staffMember.save();
+                toadmin("kvishnuprasanth2@gmail.com")
                 ticket.picture.data = fs.readFileSync(files.picture.filepath)
                 ticket.picture.contentType = files.picture.mimetype
                 await ticket.save()

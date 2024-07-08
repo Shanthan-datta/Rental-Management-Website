@@ -69,7 +69,7 @@ const Nav = () => {
           <img src={headerLogo} alt="Logo" className="w-auto h-20 sm:h-18" />
         </RouterLink>
         <ul className="flex-1 flex justify-center items-center gap-30 sm:gap-8 max-lg:hidden ">
-          <li className="relative">
+          <li className="relative mx-4">
             <RouterLink
               to="/"
               className="nav-link"
@@ -80,7 +80,7 @@ const Nav = () => {
               </button>
             </RouterLink>
           </li>
-          <li className="relative">
+          <li className="relative mx-4">
             <ScrollLink
               to="about-us"
               smooth={true}
@@ -93,7 +93,7 @@ const Nav = () => {
               </button>
             </ScrollLink>
           </li>
-          <li className="relative">
+          <li className="relative mx-4">
             <RouterLink
               to="/ticket"
               className="nav-link"
@@ -104,7 +104,7 @@ const Nav = () => {
               </button>
             </RouterLink>
           </li>
-          <li className="relative">
+          <li className="relative mx-4">
             <ScrollLink
               to="contact-us"
               smooth={true}
@@ -120,7 +120,7 @@ const Nav = () => {
 
           {!(isLoggedIn || isAdminLoggedIn || isStaffLoggedIn) && (
             <>
-              <li className="relative">
+              <li className="relative mx-4">
                 <div className="relative">
                   <button
                     onClick={toggleLoginDropdown}
@@ -132,7 +132,7 @@ const Nav = () => {
                 </div>
               </li>
 
-              <li className="relative">
+              <li className="relative mx-4 ">
                 <RouterLink
                   to="/signup"
                   className="bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 font-montserrat leading-normal text-lg"
@@ -145,7 +145,7 @@ const Nav = () => {
           )}
 
           {isLoggedIn && (
-            <li className="relative">
+            <li className="relative mx-4">
               <RouterLink
                 to="/MyTickets"
                 className="bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 font-montserrat leading-normal text-lg"
@@ -156,7 +156,7 @@ const Nav = () => {
             </li>
           )}
           {(isLoggedIn || isAdminLoggedIn || isStaffLoggedIn) && (
-            <li className="relative" onClick={logout}>
+            <li className="relative mx-4" onClick={logout}>
               <RouterLink
                 to="#"
                 className="bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300 font-montserrat leading-normal text-lg"
