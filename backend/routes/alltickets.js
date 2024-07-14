@@ -3,6 +3,8 @@ const User = require("../models/users");
 const AllTickets = require("../models/allticketsschema");
 const Staff = require("../models/staff")
 const { toadmin } = require("../routes/mailers/toadmin");
+const { tostaff } = require("../routes/mailers/tostaff");
+const { touser } = require("../routes/mailers/touser");
 
 // creates new ticket
 router.post("/addTickets", async (req, res) => {
@@ -26,7 +28,7 @@ router.post("/addTickets", async (req, res) => {
                 status:"pending",
                 users:existingUser,
             });
-            toadmin("kvishnuprasanth2@gmail.com")
+            toadmin("kvishnuprasanth2@gmail.com",`new ticket has been added by ${existingUser.fullName}! contactNo:${existingUser.contactNo}!` , "NEW TICKET ADDED")
 
             await newTicket.save();
             existingUser.TicketsList.push(newTicket);
@@ -76,8 +78,9 @@ router.post("/assign", async (req, res) => {
         if (!ticket) {
             return res.status(404).json({ error: "Ticket not found" });
         }
-        console.log(ticket)
-        toadmin("kvishnuprasanth2@gmail.com")
+        const user = User.findById(ticket.users)
+        tostaff(staff.email,`new ticket has been raised`)
+        touser(user.email,`${staff.fullName}! has been assigned for the ticket contactno: ${staff.contactNo}!`)
         ticket.status = "assigned"
         ticket.staffName = staff.fullName
         ticket.staffNumber = staff.contactNo

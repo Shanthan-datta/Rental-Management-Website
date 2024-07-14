@@ -79,7 +79,7 @@ const Dropdown = ({ onClose }) => {
 
           {/* Login dropdown section */}
           <div className="relative">
-            {!isLoggedIn && (
+            {!(isLoggedIn || isAdminLoggedIn || isStaffLoggedIn) && (
               <>
                 <div
                   onClick={toggleLoginDropdown}

@@ -168,7 +168,7 @@ const Nav = () => {
           )}
         </ul>
         {!isOpen && (
-        <div className="hidden max-lg:block mr-8 right-8">
+        <div className="hidden max-lg:block mr-20">
           <button onClick={toggleDropdown}>
             <img
               src={hamburger}

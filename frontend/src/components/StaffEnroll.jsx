@@ -2,8 +2,15 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useSelector } from 'react-redux';
+import { authActions } from '../store';
+import {Typography , Button} from 'antd';
+import { useNavigate } from 'react-router-dom';
+
 
 const StaffEnroll = () => {
+  const navigate = useNavigate()
+  const isadmin = useSelector((state) => state.isAdminLoggedIn);
   const [form, setForm] = useState({
     fullName: '',
     staffId: '',
@@ -49,7 +56,30 @@ const StaffEnroll = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+    <>
+    {!isadmin && (
+      <div style={{ padding: '16px' }}>
+        <Typography.Paragraph style={{ marginBottom: '16px' }}>
+          You need to login as an Admin to access this page. Click the button below to login as admin.
+        </Typography.Paragraph>
+        <Button
+          style={{ marginBottom: '16px', backgroundColor: 'purple', color: 'white', border: 'none' }}
+          onClick={() => navigate('/Adminlogin')}
+        >
+          Login as Admin
+        </Button>
+        <Typography.Paragraph>
+          If you want to raise a ticket or want to explore about us, click the button below.
+        </Typography.Paragraph>
+        <Button
+          style={{ backgroundColor: 'purple', color: 'white', border: 'none' }}
+          onClick={() => navigate('/')}
+        >
+          Home
+        </Button>
+      </div>
+    )}
+    {isadmin && (<div className="flex justify-center items-center min-h-screen bg-gray-100">
       <form
         onSubmit={handleSubmit}
         className="bg-white p-8 rounded shadow-md w-full max-w-md"
@@ -115,7 +145,8 @@ const StaffEnroll = () => {
         </div>
       </form>
       <ToastContainer />
-    </div>
+    </div>) }
+    </>
   );
 };
 

@@ -1,12 +1,12 @@
 const nodemailer = require('../../conn/nodemailer');
-module.exports.toadmin = async (email,message,subject) => 
+module.exports.touser = async (email,message) => 
 {
     try {
         
         let info = await nodemailer.transporter.sendMail({
             from: process.env.AUTH_MAILER_EMAIL,
             to: email,
-            subject: subject,
+            subject: "staff assigned",
             html: message
          });     console.log('email sent');
 

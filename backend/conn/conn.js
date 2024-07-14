@@ -6,7 +6,7 @@ const conn = async (res,req) =>{
             useNewUrlParser: true,
             useUnifiedTopology: true
         }).
-        then(()=>{console.log("connected zooma")})
+        then(()=>{console.log("connected")})
     } catch (error) {
         res.status(404).json({message:"not found"})
     }

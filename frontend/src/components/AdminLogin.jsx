@@ -23,7 +23,9 @@ const cardStyle = {
   borderRadius: '8px',
   backgroundColor: 'white',
   padding: '16px',
-  position: 'relative', // Ensure relative positioning for absolute children
+  position: 'relative',
+
+  // Ensure relative positioning for absolute children
 };
 
 const buttonStyle = {
@@ -338,6 +340,7 @@ const AdminLogin = () => {
                       </p>
                     ) : null}
                   </div>
+                  <div className='mt-10'>
                   <Button
                     type="primary"
                     className="mt-2"
@@ -346,6 +349,7 @@ const AdminLogin = () => {
                   >
                     Assign Ticket
                   </Button>
+                  </div>
                 </Card>
               ))}
             </div>
@@ -402,6 +406,7 @@ const AdminLogin = () => {
                       </p>
                     ) : null}
                   </div>
+                  <div className='mt-10'>
                   <Button
                     type="primary"
                     className="mt-2"
@@ -409,7 +414,7 @@ const AdminLogin = () => {
                     onClick={() => handleViewPhoto(completedIssue)}
                   >
                     View Photo
-                  </Button>
+                  </Button></div>
                 </Card>
               ))}
             </div>

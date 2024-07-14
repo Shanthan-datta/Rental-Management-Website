@@ -20,7 +20,7 @@ const PopularProducts = () => {
   return (
     <div>
       <section id="products"
-       className="max-container max-sm:mt-12
+       className="max-container max-sm:mt-8
        ">
         <div className="flex flex-col
         justify-start gap-5">
