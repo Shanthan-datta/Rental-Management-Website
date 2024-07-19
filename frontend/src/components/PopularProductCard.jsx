@@ -1,11 +1,11 @@
 import {star} from '../assets/icons'
-
+import { frontendurl } from '../../url'
 const PopularProductCard = ({buildingname,rent,_id,address}) => {
   return (
     <div className="flex shrink-0 flex-col
     w-100 ">
         <img
-            src= {`http://localhost:1000/api/v5/buildingpicture?id=${_id}`}
+            src= {`${frontendurl}/api/v5/buildingpicture?id=${_id}`}
             alt={buildingname}
             className="w-[280px] h-[280px] object-cover"
         />

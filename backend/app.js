@@ -12,7 +12,7 @@ const newticketall = require('./routes/alltickets')
 const staff = require("./routes/staffapi")
 const admin = require('./routes/adminapi')
 const building = require("./routes/building")
-
+const PORT = process.env.PORT || 1000
 
 app.use(express.json())
 app.use(bodyParser.json());
@@ -33,6 +33,6 @@ app.use("/api/v5", building)
 app.use("/api/allList", newticketall)
 
 
-app.listen(1000,()=>{
+app.listen(PORT,()=>{
     console.log("ok")
 })

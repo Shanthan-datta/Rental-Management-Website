@@ -34,7 +34,7 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { username, password } = req.body
 
     // Basic validation
     if (!username || !password) {
@@ -43,7 +43,7 @@ router.post("/login", async (req, res) => {
 
     // Find admin in mock database
     const admin = await Admin.findOne({ username });
-
+    console.log(admin)
     if (!admin || admin.password !== password) {
       return res.status(401).json({ message: "Invalid username or password" });
     }
