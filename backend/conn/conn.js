@@ -1,9 +1,10 @@
 const mongoose = require("mongoose")
 const conn = async (req,res) =>{
     try {
-
+        console.log(process.env.MONGO_URL)
         await mongoose.
-        connect(process.env.MONGO_URL,{
+
+        connect("mongodb://localhost:27017/3wayassist",{
             useNewUrlParser: true,
             useUnifiedTopology: true
         }).
